@@ -3,7 +3,8 @@ public class Player {
     private int speed;
     private int health;
     final int MAX_HEALTH = 100;
-
+    private int x;
+    private int y;
 
     public Player(){
         speed = 10;
@@ -26,6 +27,22 @@ public class Player {
         if (health < 0 || health > MAX_HEALTH)
             throw new IllegalArgumentException("Health can't be less than zero (0)");
         this.health = health;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
 

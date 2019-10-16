@@ -1,21 +1,21 @@
 public class GameMap {
 
-    private MapTiles[][] mapTiles;
+    private MapTile[][] mapTiles;
     private int dimensions;
 
     public GameMap(int dimensions){
         this.dimensions=dimensions;
-        mapTiles = new MapTiles[dimensions][dimensions];
+        mapTiles = new MapTile[dimensions][dimensions];
         // to lay out tiles
         randomizeMap();
     }
 
-    //Method that takes creates tiles and places them on the MapTiles Matrix
+    //Method that takes creates tiles and places them on the MapTile Matrix
     private void randomizeMap(){
     // do something
     }
 
-    public MapTiles[][] getMapTiles() {
+    public MapTile[][] getMapTiles() {
         return mapTiles;
     }
 

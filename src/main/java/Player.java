@@ -1,16 +1,13 @@
-import javafx.geometry.Pos;
-
-public class Player {
+public class Player extends Movable {
 
     private int speed;
     private int health;
     final int MAX_HEALTH = 100;
-    private Position position;
 
     public Player(){
+        super(0,0);
         speed = 10;
         health = MAX_HEALTH;
-       position = new Position(0,0);
     }
 
     public int getSpeed() {
@@ -30,42 +27,6 @@ public class Player {
             throw new IllegalArgumentException("Health can't be less than zero (0)");
         this.health = health;
     }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position pos) {
-        this.position = pos;
-    }
-
-
-    public Position moveNorth(){
-        Position tempPos = getPosition();
-        tempPos.setY(tempPos.getY() - 1);
-
-        return tempPos;
-    }
-
-    public Position moveSouth(){
-        Position tempPos = getPosition();
-        tempPos.setY(tempPos.getY() + 1);
-        return tempPos;
-    }
-
-    public Position moveWest(){
-        Position tempPos = getPosition();
-        tempPos.setX(tempPos.getX() - 1);
-        return tempPos;
-    }
-
-    public Position moveEast() {
-        Position tempPos = getPosition();
-        tempPos.setX(tempPos.getX() + 1);
-        return tempPos;
-    }
-
-
 
     @Override
     public String toString() {

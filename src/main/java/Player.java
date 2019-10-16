@@ -1,14 +1,16 @@
+import javafx.geometry.Pos;
+
 public class Player {
 
     private int speed;
     private int health;
     final int MAX_HEALTH = 100;
-    private int x;
-    private int y;
+    private Position position;
 
     public Player(){
         speed = 10;
         health = MAX_HEALTH;
+       position = new Position(0,0);
     }
 
     public int getSpeed() {
@@ -29,21 +31,40 @@ public class Player {
         this.health = health;
     }
 
-    public int getX() {
-        return x;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setPosition(Position pos) {
+        this.position = pos;
     }
 
-    public int getY() {
-        return y;
+
+    public Position moveNorth(){
+        Position tempPos = getPosition();
+        tempPos.setY(tempPos.getY() - 1);
+
+        return tempPos;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public Position moveSouth(){
+        Position tempPos = getPosition();
+        tempPos.setY(tempPos.getY() + 1);
+        return tempPos;
     }
+
+    public Position moveWest(){
+        Position tempPos = getPosition();
+        tempPos.setX(tempPos.getX() - 1);
+        return tempPos;
+    }
+
+    public Position moveEast() {
+        Position tempPos = getPosition();
+        tempPos.setX(tempPos.getX() + 1);
+        return tempPos;
+    }
+
 
 
     @Override
@@ -53,4 +74,6 @@ public class Player {
                 ", health=" + health +
                 '}';
     }
+
+
 }

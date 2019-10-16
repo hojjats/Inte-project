@@ -19,7 +19,6 @@ public class PlayerTest {
     @Test
     void getSpeed(){
         assertEquals(p.getSpeed(),10);
-
     }
 
     @Test
@@ -52,6 +51,33 @@ public class PlayerTest {
         assertEquals(p.getSpeed(),newVal);
     }
 
+    @Test
+    void moveNorth(){
+        Position temp = new Position(0,-1);
+        assertEquals(p.moveNorth().getY(),temp.getY());
+
+    }
+
+    @Test
+    void moveSouth(){
+        Position temp = new Position(0,1);
+        assertEquals(p.moveSouth().getY(),temp.getY());
+
+    }
+
+    @Test
+    void moveWest(){
+        Position temp = new Position(-1,0);
+        assertEquals(p.moveWest().getX(),temp.getX());
+
+    }
+
+    @Test
+    void moveEast(){
+        Position temp = new Position(1,0);
+        assertEquals(p.moveEast().getX(),temp.getX());
+
+    }
 
 
 

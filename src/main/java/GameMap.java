@@ -10,7 +10,7 @@ public class GameMap {
         randomizeMap();
     }
 
-    //Method that takes creates tiles and places them on the MapTile Matrix
+    //Method that creates tiles and places them on the MapTile Matrix
     private void randomizeMap(){
     // do something
     }
@@ -26,6 +26,6 @@ public class GameMap {
     public boolean validatePosition(Position pos){
         int tempX = pos.getX();
         int tempY = pos.getY();
-        return (tempX < dimensions && tempX > 0 && tempY < dimensions && tempY > 0);
+        return (tempX <= dimensions && tempX > 0 && tempY <= dimensions && tempY > 0);
     }
 }

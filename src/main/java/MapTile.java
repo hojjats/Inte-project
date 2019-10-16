@@ -1,9 +1,20 @@
 public abstract class MapTile {
-    int actionPointsConst;
-    boolean blocked;
+    private boolean blocked;
+    private int actionPointsCost;
 
 
-    public MapTile(boolean blocked) {
+    public MapTile(boolean blocked, int actionPointsCost) {
         this.blocked = blocked;
+        this.actionPointsCost = actionPointsCost;
+    }
+
+    public int getActionPointsCost() {
+        return actionPointsCost;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
     }
 }
+
+

@@ -7,7 +7,10 @@ public class MapTile {
     private MapTile eastTile;
     private MapTile westTile;
 
+    // Effect can be null, no effect on tile
     public MapTile(Effect effect, Position position) {
+        if(position == null)
+            throw new IllegalArgumentException("Position can't be null ");
         this.effect = effect;
         this.position = position;
     }

@@ -1,28 +1,24 @@
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 public abstract class Creature {
 
-    private Position position;
     private int speed;
     private int currentHealth;
     private int maxHealth;
     private int strength;
 
-    public Creature(int x, int y,int strength, int speed, int maxHealth) {
-        this.position = new Position(x,y);
+    public Creature(int strength, int speed, int maxHealth) {
+        if(strength<=0||maxHealth<=0||speed<0){
+            throw new IllegalArgumentException();
+        }
         this.speed = speed;
         this.currentHealth = maxHealth;
         this.maxHealth = maxHealth;
         this.strength = strength;
     }
 
-    public Position getPosition() {
-        return position;
-    }
 
-    public void setPosition(Position pos) {
-        this.position = pos;
-    }
-
-    public Position moveNorth(){
+   /** public Position moveNorth(){
         Position tempPos = getPosition();
         tempPos.setY(tempPos.getY() - 1);
 
@@ -45,7 +41,7 @@ public abstract class Creature {
         Position tempPos = getPosition();
         tempPos.setX(tempPos.getX() + 1);
         return tempPos;
-    }
+    }**/
 
 
     public int getSpeed() {
@@ -76,6 +72,6 @@ public abstract class Creature {
 
     public abstract int attack();
 
-    public abstract void takeDamage(int damageAmount);
+    public abstract String takeDamage(int damageAmount);
 
 }

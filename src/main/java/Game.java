@@ -8,7 +8,7 @@ public class Game {
         player = new Player();
     }
 
-    public void movePlayer(Directions direction){
+   /** public void movePlayer(Directions direction){
         Position tempPos = null;
         switch(direction){
             case NORTH:
@@ -28,7 +28,7 @@ public class Game {
         if(validatePosition(tempPos)){
             player.setPosition(tempPos);
         }
-    }
+    }**/
 
     public Player getPlayer(){
         return player;

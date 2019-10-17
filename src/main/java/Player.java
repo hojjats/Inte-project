@@ -1,7 +1,7 @@
 public class Player extends Creature {
 
     public Player(){
-        super(0,0,6, 10, 100);
+        super(10,10,10);
     }
 
     @Override
@@ -18,7 +18,8 @@ public class Player extends Creature {
     }
 
     @Override
-    public void takeDamage(int damageAmount) {
+    public String takeDamage(int damageAmount) {
         setCurrentHealth(getCurrentHealth() - damageAmount);
+        return "You take "+damageAmount+" damage!";
     }
 }

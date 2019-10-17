@@ -8,7 +8,7 @@ public class GameTest {
     private Player player = game.getPlayer();
 
 
-    @Test
+  /**  @Test
     void playerMoveNorth(){
         Position expected = new Position(1,0);
         player.setPosition(new Position(1,1));
@@ -38,7 +38,7 @@ public class GameTest {
         player.setPosition(new Position(1,1));
         game.movePlayer(Directions.WEST);
         assertEquals(expected,player.getPosition());
-    }
+    }**/
 
 
 }

@@ -1,19 +1,20 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
     Player p = new Player();
 
     @Test
     void constructorCall() {
-        assertEquals(p.getHealth(), 100);
+        assertEquals(p.getCurrentHealth(), 100);
         assertEquals(p.getSpeed(), 10);
     }
 
     @Test
     void getHealth(){
-        assertEquals(p.getHealth(),100);
+        assertEquals(p.getCurrentHealth(),100);
     }
 
     @Test
@@ -24,15 +25,15 @@ public class PlayerTest {
     @Test
     void setHealthToPositiveValue(){
         int newVal = 90;
-        p.setHealth(newVal);
-       assertEquals(p.getHealth(),newVal);
+        p.setCurrentHealth(newVal);
+       assertEquals(p.getCurrentHealth(),newVal);
     }
 
     @Test
     void setHealthToNegativeValue(){
         int newVal = -10;
         assertThrows(IllegalArgumentException.class, () -> {
-        p.setHealth(newVal);
+        p.setCurrentHealth(newVal);
         });
     }
 
@@ -40,7 +41,7 @@ public class PlayerTest {
     void setHealthToOverMaxHealth(){
         int newVal = 101;
         assertThrows(IllegalArgumentException.class, () -> {
-            p.setHealth(newVal);
+            p.setCurrentHealth(newVal);
         });
     }
 
@@ -79,12 +80,30 @@ public class PlayerTest {
 
     }
 
+    @Test
+    void getStrength(){
+        assertEquals(p.getStrength(), 6);
+    }
 
 
+    @Test
+    void setStrength(){
+        p.setStrength(7);
+        assertEquals(p.getStrength(), 7);
+    }
 
 
+    @Test
+    void attack(){
+          int attackStrength = p.attack();
+          assertEquals(attackStrength, 6);
+    }
 
-
+    @Test
+    void takeDamage(){
+        p.takeDamage(10);
+        assertEquals(p.getCurrentHealth(), 90);
+    }
 
 
 

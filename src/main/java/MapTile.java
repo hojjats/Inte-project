@@ -14,7 +14,7 @@ public class MapTile {
             throw new IllegalArgumentException("Position can't be null ");
         if (name == null)
             throw new IllegalArgumentException("Name can't be null");
-        if (name.equals(""))
+        if (name.trim().equals(""))
             throw new IllegalArgumentException("Name can't be empty");
         this.effect = effect;
         this.position = position;

@@ -41,6 +41,13 @@ public class MapTileTest {
     }
 
     @Test
+    void createMapTileWhitespacesName(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            new MapTile(new Effect(), new Position(0,0),"   ");
+        });
+    }
+
+    @Test
     void getEffect() {
         Effect e = new Effect();
         MapTile maptile = new MapTile(e, new Position(0, 0), "HeroStorm");
@@ -58,5 +65,8 @@ public class MapTileTest {
         MapTile maptile = new MapTile(new Effect(), new Position(0, 0), "HeroStorm");
         assertEquals(maptile.getName(), "HeroStorm");
     }
+
+
+
 
 }

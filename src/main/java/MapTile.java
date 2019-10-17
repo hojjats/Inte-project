@@ -1,20 +1,22 @@
-public abstract class MapTile {
-    private boolean blocked;
-    private int actionPointsCost;
+public class MapTile {
 
+    private Effect effect;
+    private Position position;
+    private MapTile northTile;
+    private MapTile southTile;
+    private MapTile eastTile;
+    private MapTile westTile;
 
-    public MapTile(boolean blocked, int actionPointsCost) {
-        this.blocked = blocked;
-        this.actionPointsCost = actionPointsCost;
+    public MapTile(Effect effect, Position position) {
+        this.effect = effect;
+        this.position = position;
     }
 
-    public int getActionPointsCost() {
-        return actionPointsCost;
+    public Effect getEffect() {
+        return effect;
     }
 
-    public boolean isBlocked() {
-        return blocked;
+    public Position getPosition() {
+        return position;
     }
 }
-
-

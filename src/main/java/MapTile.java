@@ -9,8 +9,14 @@ public class MapTile {
     private MapTile westTile;
 
     // Effect can be null, no effect on tile
+    public MapTile(Effect effect, Position position, String name, MapTile previousTile, Directions direction) {
+        this(effect, position, name);
+        // Setting of tile
+
+    }
+
     public MapTile(Effect effect, Position position, String name) {
-        if(position == null)
+        if (position == null)
             throw new IllegalArgumentException("Position can't be null ");
         if (name == null)
             throw new IllegalArgumentException("Name can't be null");
@@ -19,6 +25,12 @@ public class MapTile {
         this.effect = effect;
         this.position = position;
         this.name = name;
+
+
+    }
+
+    private void setTile(MapTile prev, Directions dir) {
+
     }
 
     public Effect getEffect() {
@@ -31,5 +43,21 @@ public class MapTile {
 
     public String getName() {
         return name;
+    }
+
+    public MapTile getNorthTile() {
+        return northTile;
+    }
+
+    public MapTile getSouthTile() {
+        return southTile;
+    }
+
+    public MapTile getEastTile() {
+        return eastTile;
+    }
+
+    public MapTile getWestTile() {
+        return westTile;
     }
 }

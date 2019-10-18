@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
     Player p = new Player();
+    Weapon woodAxe = new Weapon("Wood Axe", 4);
+    Armor leatherArmor = new Armor("Leather Armor", 6);
+
 
     @Test
     void constructorCall() {
@@ -75,7 +78,7 @@ public class PlayerTest {
 
     @Test
     void getStrength(){
-        assertEquals(p.getStrength(), 6);
+        assertEquals(p.getStrength(), 10);
     }
 
 
@@ -85,19 +88,49 @@ public class PlayerTest {
         assertEquals(p.getStrength(), 7);
     }
 
-
     @Test
-    void attack(){
-          int attackStrength = p.attack();
-          assertEquals(attackStrength, 6);
+    void setArmor() {
+        p.setArmor(leatherArmor);
+        assertEquals(p.getArmor(),  leatherArmor);
     }
 
     @Test
-    void takeDamage(){
-        p.takeDamage(10);
+    void setWeapon() {
+        p.setWeapon(woodAxe);
+        assertEquals(p.getWeapon(), woodAxe);
+    }
+
+    @Test
+    void toStringMethod() {
+        assertEquals("Player{speed=10, health=100}", p.toString());
+    }
+
+    @Test
+    void attackWithoutWeapon(){
+        int attackStrength = p.attack();
+        assertEquals(attackStrength, 10);
+    }
+
+    @Test
+    void attackWithWeapon() {
+        p.setWeapon(woodAxe);
+        int attackStrength = p.attack();
+        assertEquals(attackStrength, (10+4));
+    }
+
+    @Test
+    void takeDamageWithoutArmor(){
+        String str = p.takeDamage(10);
         assertEquals(p.getCurrentHealth(), 90);
+        assertEquals(str, "You take 10 damage!");
     }
 
-
+    @Test
+    void takeDamageWithArmor(){
+        p.setArmor(leatherArmor);
+        String str = p.takeDamage(10);
+        assertEquals(p.getCurrentHealth(), 96);
+        assertEquals(str, "You take 4 damage!");
+    }
 
 }

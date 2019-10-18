@@ -1,25 +1,52 @@
 public class Player extends Creature {
 
+    private Weapon weapon;
+    private Armor armor;
+
     public Player(){
-        super(10,10,10);
+        super(10,10,100);
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    // TODO: Actual algo to calculate atk and dmg
+    @Override
+    public int attack() {
+        int totalDamage = getStrength();
+        if (weapon != null) {
+            totalDamage += weapon.getDamage();
+        }
+        return totalDamage;
+    }
+
+    @Override
+    public String takeDamage(int damageAmount) {
+        if (armor != null) {
+            damageAmount -= armor.getArmorRating();
+        }
+        setCurrentHealth(getCurrentHealth() - damageAmount);
+        return "You take "+damageAmount+" damage!";
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "speed=" + getSpeed() +
-                ", health=" + getCurrentHealth() +
-                '}';
-    }
-
-    @Override
-    public int attack() {
-        return getStrength();
-    }
-
-    @Override
-    public String takeDamage(int damageAmount) {
-        setCurrentHealth(getCurrentHealth() - damageAmount);
-        return "You take "+damageAmount+" damage!";
+            "speed=" + getSpeed() +
+            ", health=" + getCurrentHealth() +
+            '}';
     }
 }

@@ -35,7 +35,6 @@ public class MapTileTest {
         assertEquals(mapTile.getEffect(), e);
         assertEquals(mapTile.getPosition().getX(), startTile.getPosition().getX());
         assertEquals(mapTile.getPosition().getY(), startTile.getPosition().getY() + 1);
-
     }
 
     @Test
@@ -48,7 +47,7 @@ public class MapTileTest {
     }
 
     @Test
-    void createMapTileToSouthOfStarterTile(){
+    void createMapTileToSouthOfStarterTile() {
         Effect e = new Effect();
         MapTile mapTile = new MapTile(e, "HeroStorm", startTile, Directions.SOUTH);
         assertEquals(mapTile.getEffect(), e);
@@ -57,14 +56,14 @@ public class MapTileTest {
     }
 
     @Test
-    void createMapTileWithNullPreviousTile(){
+    void createMapTileWithNullPreviousTile() {
         assertThrows(IllegalArgumentException.class, () -> {
-         new MapTile(new Effect(), "HeroStorm", null, Directions.SOUTH);
+            new MapTile(new Effect(), "HeroStorm", null, Directions.SOUTH);
         });
     }
 
     @Test
-    void createMapTileWithNullDirection(){
+    void createMapTileWithNullDirection() {
         assertThrows(IllegalArgumentException.class, () -> {
             new MapTile(new Effect(), "HeroStorm", startTile, null);
         });
@@ -76,7 +75,6 @@ public class MapTileTest {
         MapTile mapTile = new MapTile(null, "HeroStorm");
         assertNull(mapTile.getEffect());
     }
-
 
 
     @Test
@@ -98,6 +96,32 @@ public class MapTileTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new MapTile(new Effect(), "   ");
         });
+    }
+
+    @Test
+    void setTileNorth() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.NORTH);
+        assertEquals(mapTile.getSouthTile(), startTile);
+        assertEquals(startTile.getNorthTile(), mapTile);
+    }
+
+    @Test
+    void setTileSouth() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.SOUTH);
+        assertEquals(mapTile.getNorthTile(), startTile);
+        assertEquals(startTile.getSouthTile(), mapTile);
+    }
+    @Test
+    void setTileEast() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.EAST);
+        assertEquals(mapTile.getWestTile(), startTile);
+        assertEquals(startTile.getEastTile(), mapTile);
+    }
+    @Test
+    void setTileWest() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        assertEquals(mapTile.getEastTile(), startTile);
+        assertEquals(startTile.getWestTile(), mapTile);
     }
 
     @Test

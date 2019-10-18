@@ -16,9 +16,7 @@ public class MapTile {
         if (direction == null)
             throw new IllegalArgumentException("Direction can't be null");
         setPosition(previousTile, direction);
-        // Setting of tile
-
-
+        setTile(previousTile, direction);
     }
 
     public MapTile(Effect effect, String name) {
@@ -31,8 +29,25 @@ public class MapTile {
         this.name = name;
     }
 
-    private void setTile(MapTile prev, Directions dir) {
-
+    public void setTile(MapTile prev, Directions dir) {
+        switch (dir){
+            case NORTH:
+                this.setSouthTile(prev);
+                prev.setNorthTile(this);
+                break;
+            case SOUTH:
+                this.setNorthTile(prev);
+                prev.setSouthTile(this);
+                break;
+            case EAST:
+                this.setWestTile(prev);
+                prev.setEastTile(this);
+                break;
+            case WEST:
+                this.setEastTile(prev);
+                prev.setWestTile(this);
+                break;
+        }
     }
 
     private void setPosition(MapTile prev, Directions dir) {
@@ -78,5 +93,21 @@ public class MapTile {
 
     public MapTile getWestTile() {
         return westTile;
+    }
+
+    public void setNorthTile(MapTile northTile) {
+        this.northTile = northTile;
+    }
+
+    public void setSouthTile(MapTile southTile) {
+        this.southTile = southTile;
+    }
+
+    public void setEastTile(MapTile eastTile) {
+        this.eastTile = eastTile;
+    }
+
+    public void setWestTile(MapTile westTile) {
+        this.westTile = westTile;
     }
 }

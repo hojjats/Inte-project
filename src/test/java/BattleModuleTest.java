@@ -3,15 +3,24 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BattleModuleTest {
-
     Player basicPlayer = new Player();
-    Enemy basicEnemy = new Enemy("Grunt",2,2,4,false);
+
+
 
     @Test
-    void startBattle(){
+    void startBattlePlayerInitiative(){
+        Enemy basicEnemy = new Enemy();
         BattleModule battle = new BattleModule(basicPlayer,basicEnemy);
 
         assertEquals(battle.getAttacker(),basicPlayer);
         assertEquals(battle.getDefender(),basicEnemy);
     }
+
+    @Test
+    void startBattleEnemyInitiative(){
+        Enemy fastEnemy = new Enemy();
+        BattleModule battle = new BattleModule(basicPlayer,fastEnemy);
+
+    }
+
 }

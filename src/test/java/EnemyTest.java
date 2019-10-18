@@ -6,8 +6,6 @@ public class EnemyTest{
 
     Enemy basicEnemy = new Enemy("Goblin", 20,2,2,true);
 
-
-
     @Test
     void createEnemy(){
         Enemy enemy = new Enemy("Troll",100, 10,10,true);

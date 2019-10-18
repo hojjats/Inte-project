@@ -56,6 +56,20 @@ public class MapTileTest {
         assertEquals(mapTile.getPosition().getY(), startTile.getPosition().getY() - 1);
     }
 
+    @Test
+    void createMapTileWithNullPreviousTile(){
+        assertThrows(IllegalArgumentException.class, () -> {
+         new MapTile(new Effect(), "HeroStorm", null, Directions.SOUTH);
+        });
+    }
+
+    @Test
+    void createMapTileWithNullDirection(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            new MapTile(new Effect(), "HeroStorm", startTile, null);
+        });
+    }
+
 
     @Test
     void createMapTileNullEffect() {

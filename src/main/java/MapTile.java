@@ -11,6 +11,10 @@ public class MapTile {
     // Effect can be null, no effect on tile
     public MapTile(Effect effect, String name, MapTile previousTile, Directions direction) {
         this(effect, name);
+        if (previousTile == null)
+            throw new IllegalArgumentException("PreviousTile can't be null");
+        if (direction == null)
+            throw new IllegalArgumentException("Direction can't be null");
         setPosition(previousTile, direction);
         // Setting of tile
 

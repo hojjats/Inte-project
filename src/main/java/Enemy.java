@@ -5,8 +5,8 @@ public class Enemy extends Creature {
     private boolean isAlive;
 
 
-    public Enemy(String name,int health,int strength,int speed, boolean isAggressive){
-        super(strength,speed,health);
+    public Enemy(String name,int strength,int speed, boolean isAggressive){
+        super(speed, strength);
         this.isAggressive = isAggressive;
         this.name = name;
         isAlive=true;
@@ -32,11 +32,11 @@ public class Enemy extends Creature {
         if(!isAlive){
             return name+" is already dead";
         }
-        if(getCurrentHealth()<= damageAmount){
+        if(getStrength()<= damageAmount){
             isAlive = false;
             return name +" dies";
         }
-        setCurrentHealth(getCurrentHealth()-damageAmount);
+        setStrength(getStrength()-damageAmount);
         return name +" takes "+ damageAmount+" damage";
     }
 

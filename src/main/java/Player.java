@@ -4,7 +4,7 @@ public class Player extends Creature {
     private Armor armor;
 
     public Player(){
-        super(10,10,100);
+        super(10,10);
     }
 
     public void setArmor(Armor armor) {
@@ -38,7 +38,7 @@ public class Player extends Creature {
         if (armor != null) {
             damageAmount -= armor.getArmorRating();
         }
-        setCurrentHealth(getCurrentHealth() - damageAmount);
+        setStrength(getStrength() - damageAmount);
         return "You take "+damageAmount+" damage!";
     }
 
@@ -46,7 +46,7 @@ public class Player extends Creature {
     public String toString() {
         return "Player{" +
             "speed=" + getSpeed() +
-            ", health=" + getCurrentHealth() +
+            ", strength=" + getStrength() +
             '}';
     }
 }

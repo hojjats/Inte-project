@@ -2,18 +2,16 @@
 public abstract class Creature {
 
     private int speed;
-    private int currentHealth;
-    private int maxHealth;
+    private int maxStrength;
     private int strength;
 
-    public Creature(int strength, int speed, int maxHealth) {
-        if(strength<=0||maxHealth<=0||speed<0){
+    public Creature(int speed, int maxStrength) {
+        if(maxStrength <=0||speed<0){
             throw new IllegalArgumentException();
         }
         this.speed = speed;
-        this.currentHealth = maxHealth;
-        this.maxHealth = maxHealth;
-        this.strength = strength;
+        this.strength = maxStrength;
+        this.maxStrength = maxStrength;
     }
 
 
@@ -50,22 +48,21 @@ public abstract class Creature {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
-    public int getCurrentHealth() {
-        return currentHealth;
-    }
-
+    /*
     public void setCurrentHealth(int currentHealth) {
-        if (currentHealth < 0 || currentHealth > maxHealth)
+        if (currentHealth < 0 || currentHealth > maxStrength)
             throw new IllegalArgumentException("Health can't be less than zero (0)");
         this.currentHealth = currentHealth;
     }
+    */
 
     public int getStrength() {
         return strength;
     }
 
     public void setStrength(int strength) {
+        if (strength < 0 || strength > maxStrength)
+            throw new IllegalArgumentException("Health can't be less than zero (0)");
         this.strength = strength;
     }
 

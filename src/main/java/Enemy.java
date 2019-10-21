@@ -12,6 +12,12 @@ public class Enemy extends Creature {
         isAlive=true;
     }
 
+    public Enemy(){
+        super(5,5,5);
+        isAggressive=false;
+        name="Grunt";
+    }
+
     public int attack(){
         return getStrength();
     }

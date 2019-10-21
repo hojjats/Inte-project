@@ -111,17 +111,35 @@ public class MapTileTest {
         assertEquals(mapTile.getNorthTile(), startTile);
         assertEquals(startTile.getSouthTile(), mapTile);
     }
+
     @Test
     void setTileEast() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.EAST);
         assertEquals(mapTile.getWestTile(), startTile);
         assertEquals(startTile.getEastTile(), mapTile);
     }
+
     @Test
     void setTileWest() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
         assertEquals(mapTile.getEastTile(), startTile);
         assertEquals(startTile.getWestTile(), mapTile);
+    }
+
+    @Test
+    void getDiscoveredTiles() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        assertEquals(mapTile.getDiscoveredTiles(),2);
+        MapTile mapTile2 = new MapTile(new Effect(), "HeroStorm", mapTile, Directions.WEST);
+        assertEquals(mapTile2.getDiscoveredTiles(),3);
+    }
+
+    @Test
+    void setEnemy() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        //startTile.setEnemy();
+
+
     }
 
     @Test

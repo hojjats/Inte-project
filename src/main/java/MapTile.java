@@ -1,6 +1,9 @@
 public class MapTile {
 
     private Effect effect;
+    private Enemy enemyOnTile;
+    private Item itemOnTile;
+    private static int discoveredTiles;
     private Position position;
     private String name;
     private MapTile northTile;
@@ -27,10 +30,12 @@ public class MapTile {
         this.effect = effect;
         this.position = new Position(0, 0);
         this.name = name;
+        discoveredTiles++;
     }
 
+
     public void setTile(MapTile prev, Directions dir) {
-        switch (dir){
+        switch (dir) {
             case NORTH:
                 this.setSouthTile(prev);
                 prev.setNorthTile(this);
@@ -67,6 +72,7 @@ public class MapTile {
         }
     }
 
+
     public Effect getEffect() {
         return effect;
     }
@@ -77,6 +83,14 @@ public class MapTile {
 
     public String getName() {
         return name;
+    }
+
+    public int getDiscoveredTiles() {
+        return discoveredTiles;
+    }
+
+    public void setDiscoveredTiles(int discoveredTiles) {
+        this.discoveredTiles = discoveredTiles;
     }
 
     public MapTile getNorthTile() {

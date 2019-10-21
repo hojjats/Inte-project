@@ -1,16 +1,17 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class EnemyTest{
 
-    Enemy basicEnemy = new Enemy("Goblin", 20,2,2,true);
+    Enemy basicEnemy = new Enemy("Goblin", 5,2,true);
 
     @Test
     void createEnemy(){
-        Enemy enemy = new Enemy("Troll",100, 10,10,true);
+        Enemy enemy = new Enemy("Troll",10, 10,true);
 
-        assertEquals(enemy.getCurrentHealth(),100);
         assertEquals(enemy.getStrength(),10);
         assertEquals(enemy.getSpeed(),10);
         assertEquals(enemy.isAggressive(),true);
@@ -20,52 +21,42 @@ public class EnemyTest{
     @Test
     void createEnemyInvalidStrength(){
         assertThrows(IllegalArgumentException.class,() -> {
-            Enemy enemy = new Enemy("Troll",100,-1,10,false);
+            Enemy enemy = new Enemy("Troll",-1,5,false);
         });
 
         assertThrows(IllegalArgumentException.class,() -> {
-            Enemy enemy = new Enemy("Troll",100,0,10,false);
+            Enemy enemy = new Enemy("Troll",0,5,false);
         });
 
-    }
-
-    @Test
-    void createEnemyInvalidHealth(){
-        assertThrows(IllegalArgumentException.class,() -> {
-            Enemy enemy = new Enemy("Troll",-1,10,10,false);
-        });
-        assertThrows(IllegalArgumentException.class,() -> {
-            Enemy enemy = new Enemy("Troll",0,10,10,false);
-        });
     }
 
     @Test
     void createEnemyInvalidSpeed(){
         assertThrows(IllegalArgumentException.class,() -> {
-            Enemy enemy = new Enemy("Troll",100,10,-1,false);
+            Enemy enemy = new Enemy("Troll",10,-1,false);
         });
     }
 
     @Test
     void attack(){
-        assertEquals(basicEnemy.attack(),2);
+        assertEquals(basicEnemy.attack(),5);
     }
 
     @Test
     void takeDamage(){
-        assertEquals(basicEnemy.getName()+" takes "+10+" damage",basicEnemy.takeDamage(10));
-        assertEquals(basicEnemy.getCurrentHealth(),10);
+        assertEquals(basicEnemy.getName()+" takes "+3+" damage",basicEnemy.takeDamage(3));
+        assertEquals(basicEnemy.getStrength(),2);
     }
 
     @Test
     void enemyKilled(){
-        assertEquals(basicEnemy.getName()+" dies",basicEnemy.takeDamage(23));
+        assertEquals(basicEnemy.getName()+" dies",basicEnemy.takeDamage(5));
         assertFalse(basicEnemy.isAlive());
     }
 
     @Test
     void dealDamageOnKilled(){
-        basicEnemy.takeDamage(20);
+        basicEnemy.takeDamage(5);
         assertEquals(basicEnemy.getName()+" is already dead",basicEnemy.takeDamage(1));
     }
 

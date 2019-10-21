@@ -1,9 +1,11 @@
+import java.util.Random;
+
 public class Enemy extends Creature {
 
     private boolean isAggressive;
     private String name;
     private boolean isAlive;
-
+    private Random Rnd = new Random();
 
     public Enemy(String name,int strength,int speed, boolean isAggressive){
         super(speed, strength);
@@ -13,13 +15,20 @@ public class Enemy extends Creature {
     }
 
     public Enemy(){
-        super(5,5,5);
+        super(5,5);
         isAggressive=false;
         name="Grunt";
     }
 
     public int attack(){
-        return getStrength();
+        int damage = 0;
+        for (int i = 0; i < getStrength(); i++) {
+            int rndInt = Rnd.nextInt((6-1) +1) +1;
+            if (rndInt == 6) {
+                damage++;
+            }
+        }
+        return damage;
     }
 
     public String getName(){

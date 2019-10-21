@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +40,9 @@ public class EnemyTest{
 
     @Test
     void attack(){
-        assertEquals(basicEnemy.attack(),5);
+        int attackStrength = basicEnemy.attack();
+        System.out.println("Result: " + attackStrength);
+        assertTrue(0 <= attackStrength && attackStrength <= 5);
     }
 
     @Test

@@ -32,6 +32,8 @@ public class BattleModuleTest {
         assertEquals(battle.highestInitiative(),battle.getAttacker());
     }
 
+    @Test
+    void
 
 
 }

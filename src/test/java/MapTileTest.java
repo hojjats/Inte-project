@@ -129,18 +129,36 @@ public class MapTileTest {
     @Test
     void getDiscoveredTiles() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
-        assertEquals(mapTile.getDiscoveredTiles(),2);
+        assertEquals(mapTile.getDiscoveredTiles(), 2);
         MapTile mapTile2 = new MapTile(new Effect(), "HeroStorm", mapTile, Directions.WEST);
-        assertEquals(mapTile2.getDiscoveredTiles(),3);
+        assertEquals(mapTile2.getDiscoveredTiles(), 3);
     }
 
     @Test
-    void setEnemy() {
+    void setEnemyTier1() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
-        //startTile.setEnemy();
+        mapTile.setDiscoveredTiles(3);
+        mapTile.setEnemyOnTile();
+        assertEquals(mapTile.getEnemyOnTile().getStrength(), 1);
+    }
 
+    @Test
+    void setEnemeyTier2() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(5);
+        mapTile.setEnemyOnTile();
+        assertEquals(mapTile.getEnemyOnTile().getStrength(), 2);
+    }
+
+    @Test
+    void setEnemyTier3() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(10);
+        mapTile.setEnemyOnTile();
+        assertEquals(mapTile.getEnemyOnTile().getStrength(), 3);
 
     }
+
 
     @Test
     void getEffect() {

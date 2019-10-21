@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class MapTile {
 
     private Effect effect;
@@ -10,6 +12,10 @@ public class MapTile {
     private MapTile southTile;
     private MapTile eastTile;
     private MapTile westTile;
+    private Random rand = new Random();
+
+    //for now until read from file is implemented
+    String[] monsterNames = {"Slime", "Blob", "Rat", "Skeleton"};
 
     // Effect can be null, no effect on tile
     public MapTile(Effect effect, String name, MapTile previousTile, Directions direction) {
@@ -72,6 +78,21 @@ public class MapTile {
         }
     }
 
+    public void setEnemyOnTile() {
+        int strength = 1;
+        for (int i = 1; i <= discoveredTiles; i++) {
+            if (i % 5 == 0) {
+                strength++;
+            }
+        }
+        int speed = 1;
+        enemyOnTile = new Enemy(monsterNames[0], strength, speed, true);
+
+    }
+
+    public Enemy getEnemyOnTile() {
+        return enemyOnTile;
+    }
 
     public Effect getEffect() {
         return effect;
@@ -89,9 +110,11 @@ public class MapTile {
         return discoveredTiles;
     }
 
+    //Just to make tests
     public void setDiscoveredTiles(int discoveredTiles) {
         this.discoveredTiles = discoveredTiles;
     }
+
 
     public MapTile getNorthTile() {
         return northTile;

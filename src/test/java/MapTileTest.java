@@ -8,6 +8,17 @@ public class MapTileTest {
 
 
     @Test
+    void createTiles() {
+        MapTile[] mapTiles = new MapTile[12];
+        mapTiles[0] = startTile;
+        for (int i = 1; i < 12; i++) {
+            mapTiles[i] = new MapTile(new Effect(), i + "tile", mapTiles[i - 1], Directions.NORTH);
+        }
+
+    }
+
+
+    @Test
     void createStartTile() {
         Effect e = new Effect();
         String name = "StartTile";
@@ -16,7 +27,6 @@ public class MapTileTest {
         assertEquals(mapTile.getPosition().getX(), 0);
         assertEquals(mapTile.getPosition().getY(), 0);
         assertEquals(mapTile.getName(), name);
-
     }
 
     @Test
@@ -159,14 +169,15 @@ public class MapTileTest {
     }
 
     @Test
-    void setItemOnTile1(){
+    void setItemOnTileEvenTile() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
         mapTile.setDiscoveredTiles(3);
         mapTile.setItemOnTile();
         assertTrue(mapTile.getItemOnTile() instanceof Weapon);
     }
+
     @Test
-    void setItemOnTile2(){
+    void setItemOnTileUnevenTile() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
         mapTile.setDiscoveredTiles(6);
         mapTile.setItemOnTile();

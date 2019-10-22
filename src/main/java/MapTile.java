@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class MapTile {
 
     private Effect effect;
@@ -12,7 +10,6 @@ public class MapTile {
     private MapTile southTile;
     private MapTile eastTile;
     private MapTile westTile;
-    private Random rand = new Random();
 
     //TODO: NYA CLASSER: ITEMLIST OCH ENEMYLIST MED GETTERS SOM RETURNERAR BASERAT PÅ TIER. CONTAINERS FÖR ENEMIES OCH ITEMS
 
@@ -39,6 +36,8 @@ public class MapTile {
         this.position = new Position(0, 0);
         this.name = name;
         discoveredTiles++;
+        setEnemyOnTile();
+        setItemOnTile();
     }
 
 
@@ -127,7 +126,7 @@ public class MapTile {
     }
 
     //Just to make tests
-    public void setDiscoveredTiles(int discoveredTiles) {
+    void setDiscoveredTiles(int discoveredTiles) {
         this.discoveredTiles = discoveredTiles;
     }
 

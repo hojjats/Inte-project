@@ -8,6 +8,17 @@ public class MapTileTest {
 
 
     @Test
+    void createTiles() {
+        MapTile[] mapTiles = new MapTile[12];
+        mapTiles[0] = startTile;
+        for (int i = 1; i < 12; i++) {
+            mapTiles[i] = new MapTile(new Effect(), i + "tile", mapTiles[i - 1], Directions.NORTH);
+        }
+
+    }
+
+
+    @Test
     void createStartTile() {
         Effect e = new Effect();
         String name = "StartTile";
@@ -16,7 +27,6 @@ public class MapTileTest {
         assertEquals(mapTile.getPosition().getX(), 0);
         assertEquals(mapTile.getPosition().getY(), 0);
         assertEquals(mapTile.getName(), name);
-
     }
 
     @Test
@@ -111,18 +121,69 @@ public class MapTileTest {
         assertEquals(mapTile.getNorthTile(), startTile);
         assertEquals(startTile.getSouthTile(), mapTile);
     }
+
     @Test
     void setTileEast() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.EAST);
         assertEquals(mapTile.getWestTile(), startTile);
         assertEquals(startTile.getEastTile(), mapTile);
     }
+
     @Test
     void setTileWest() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
         assertEquals(mapTile.getEastTile(), startTile);
         assertEquals(startTile.getWestTile(), mapTile);
     }
+
+    @Test
+    void getDiscoveredTiles() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        assertEquals(mapTile.getDiscoveredTiles(), 2);
+        MapTile mapTile2 = new MapTile(new Effect(), "HeroStorm", mapTile, Directions.WEST);
+        assertEquals(mapTile2.getDiscoveredTiles(), 3);
+    }
+
+    @Test
+    void setEnemyTier1() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(3);
+        mapTile.setEnemyOnTile();
+        assertEquals(mapTile.getEnemyOnTile().getStrength(), 1);
+    }
+
+    @Test
+    void setEnemeyTier2() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(5);
+        mapTile.setEnemyOnTile();
+        assertEquals(mapTile.getEnemyOnTile().getStrength(), 2);
+    }
+
+    @Test
+    void setEnemyTier3() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(10);
+        mapTile.setEnemyOnTile();
+        assertEquals(mapTile.getEnemyOnTile().getStrength(), 3);
+    }
+
+    @Test
+    void setItemOnTileEvenTile() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(3);
+        mapTile.setItemOnTile();
+        assertTrue(mapTile.getItemOnTile() instanceof Weapon);
+    }
+
+    @Test
+    void setItemOnTileUnevenTile() {
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(6);
+        mapTile.setItemOnTile();
+        assertTrue(mapTile.getItemOnTile() instanceof Armor);
+    }
+
 
     @Test
     void getEffect() {

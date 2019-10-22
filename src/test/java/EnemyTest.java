@@ -39,7 +39,7 @@ public class EnemyTest{
 
     @Test
     void attack(){
-        Enemy enemy = new Enemy(new mocks.Random());
+        Enemy enemy = new Enemy("Lucky", 5,5, true, new mocks.Random());
         assertEquals(5, enemy.attack());
     }
 

@@ -4,16 +4,15 @@ public class Player extends Creature {
 
     private Weapon weapon;
     private Armor armor;
-    private Random Rnd;
+    private Random rnd;
 
     public Player(){
-        super(10,10);
-        this.Rnd = new Random();
+        this(new Random());
     }
 
-    public Player(mocks.Random mockRandom) {
+    public Player(Random rnd) {
         super(10, 10);
-        this.Rnd = mockRandom;
+        this.rnd = rnd;
     }
 
     public void setArmor(Armor armor) {
@@ -48,7 +47,7 @@ public class Player extends Creature {
         }
         int damage = 0;
         for (int i = 0; i < rolls; i++) {
-            int rndInt = Rnd.nextInt((6 - 1) + 1) + 1;
+            int rndInt = rnd.nextInt((6 - 1) + 1) + 1;
             if (rndInt == 6) {
                 damage++;
             }
@@ -69,7 +68,7 @@ public class Player extends Creature {
     public String takeDamage(int damageAmount) {
         if (armor != null) {
             for (int i = 0; i < armor.getArmorRating(); i++) {
-                int rndInt = Rnd.nextInt((6 - 1) + 1) + 1;
+                int rndInt = rnd.nextInt((6 - 1) + 1) + 1;
                 if (rndInt == 6) {
                     damageAmount--;
                 }

@@ -4,33 +4,27 @@ public class Enemy extends Creature {
 
     private boolean isAggressive;
     private String name;
-    private boolean isAlive;
-    private Random Rnd = new Random();
+    private Random rnd;
 
     public Enemy(String name,int strength,int speed, boolean isAggressive){
-        super(speed, strength);
-        this.isAggressive = isAggressive;
-        this.name = name;
-        isAlive=true;
+        this(name, strength, speed, isAggressive, new Random());
     }
 
-    public Enemy(mocks.Random mockRandom) {
-        super(5,5);
-        this.Rnd = mockRandom;
-        isAggressive = false;
-        name = "Lucky Lucy";
+    public Enemy(String name,int strength,int speed, boolean isAggressive, Random rnd) {
+        super(speed,strength);
+        this.isAggressive = isAggressive;
+        this.name = name;
+        this.rnd = rnd;
     }
 
     public Enemy(){
-        super(5,5);
-        isAggressive=false;
-        name="Grunt";
+        this("Grunt", 2,5, false);
     }
 
     public int attack(){
         int damage = 0;
         for (int i = 0; i < getStrength(); i++) {
-            int rndInt = Rnd.nextInt((6-1) +1) +1;
+            int rndInt = rnd.nextInt((6-1) +1) +1;
             if (rndInt == 6) {
                 damage++;
             }
@@ -46,16 +40,12 @@ public class Enemy extends Creature {
         return isAggressive;
     }
 
-    public boolean isAlive(){
-        return isAlive;
-    }
-
     public String takeDamage(int damageAmount){
-        if(!isAlive){
+        if(!isAlive()){
             return name+" is already dead";
         }
         if(getStrength()<= damageAmount){
-            isAlive = false;
+            die();
             return name +" dies";
         }
         setStrength(getStrength()-damageAmount);

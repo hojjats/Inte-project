@@ -46,7 +46,7 @@ public class Enemy extends Creature {
         }
         if(getStrength()<= damageAmount){
             die();
-            return name +" dies";
+            return name +" Dies!";
         }
         setStrength(getStrength()-damageAmount);
         return name +" takes "+ damageAmount+" damage";

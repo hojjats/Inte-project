@@ -74,6 +74,10 @@ public class Player extends Creature {
                 }
             }
         }
+        if(getStrength()<=damageAmount){
+            die();
+            return "You Died!";
+        }
         setStrength(getStrength() - damageAmount);
         return "You take "+damageAmount+" damage!";
     }

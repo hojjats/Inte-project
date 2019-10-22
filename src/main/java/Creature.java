@@ -4,6 +4,7 @@ public abstract class Creature {
     private int speed;
     private int maxStrength;
     private int strength;
+    private boolean isAlive;
 
     public Creature(int speed, int maxStrength) {
         if(maxStrength <=0||speed<0){
@@ -12,6 +13,7 @@ public abstract class Creature {
         this.speed = speed;
         this.strength = maxStrength;
         this.maxStrength = maxStrength;
+        isAlive = true;
     }
 
 
@@ -64,6 +66,14 @@ public abstract class Creature {
         if (strength < 0 || strength > maxStrength)
             throw new IllegalArgumentException("Health can't be less than zero (0)");
         this.strength = strength;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void die(){
+        isAlive = false;
     }
 
     public abstract int attack();

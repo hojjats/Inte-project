@@ -8,26 +8,27 @@ public class BattleModule {
     private Enemy enemy;
     private int playerInitiativeScore;
     private int enemyInitiativeScore;
+    private boolean battleIsOver = false;
+    private boolean gameIsOver = false;
 
     public BattleModule(Player player,Enemy enemy){
         this.player = player;
         this.enemy = enemy;
+        this.attacker = player;
+        this.defender = enemy;
         setBattleInitiative(player.getSpeed()-enemy.getSpeed());
     }
 
     /* Checks creatures speed to determine who starts attacking
     if creatures have the same speed, the attacker is randomized*/
     private void setBattleInitiative(int initiative){
-        if(initiative>0){
-            this.attacker = player;
-            this.defender = enemy;
-        }
-        else if(initiative<0){
-            this.attacker = enemy;
-            this.defender = player;
-        }else{
+        if(initiative==0){
             randomizeInitiative();
         }
+        else if(initiative<0){
+          switchAttacker();
+        }
+
     }
 
     private void randomizeInitiative(){
@@ -62,6 +63,105 @@ public class BattleModule {
         return playerInitiativeScore>enemyInitiativeScore ? player:enemy;
     }
 
+    private void switchAttacker(){
+       Creature temp = null;
+       temp = attacker;
+       attacker = defender;
+       defender = temp;
+    }
+
+    public void battleCommand(int command){
+
+        switch (command){
+            case 1:
+                playerAttack();
+                break;
+            case 2:
+                flee();
+                break;
+        }
+    }
+
+
+    public void startBattle(){
+        while(!battleIsOver || !gameIsOver){
+    /* TO-DO Should lock player and enemy in loop until one dies or player
+    manages to flee
+     */
+        }
+    }
+
+    public void flee(){
+        // TO-DO implement flee mechanic based on speed
+    }
+
+    public boolean isBattleOver() {
+        return battleIsOver;
+    }
+
+    public boolean isGameOver(){
+        return gameIsOver;
+    }
+
+    private String playerAttack(){
+        String attackMessage="Enemy Turn!";
+        if(attacker == player) {
+            if (enemy.isAlive()) {
+               attackMessage = enemy.takeDamage(player.attack());
+                if (!enemy.isAlive()) {
+                    battleIsOver = true;
+                }
+                switchAttacker();
+            }
+        }
+        return attackMessage;
+    }
+
+    private String enemyAttack(){
+        String attackMessage = "Player Turn!";
+        if(attacker == enemy) {
+            if (player.isAlive()) {
+             attackMessage = player.takeDamage(enemy.attack());
+                 if (!player.isAlive()) {
+                      gameIsOver = true;
+                      battleIsOver = true;
+                 }
+                 switchAttacker();
+            }
+        }
+        return attackMessage;
+    }
+
+
+
+    protected String playerTestAttack(int damage){
+        String attackMessage="Enemy Turn!";
+        if(attacker == player) {
+            if (enemy.isAlive()) {
+                attackMessage = enemy.takeDamage(damage);
+                if (!enemy.isAlive()) {
+                    battleIsOver = true;
+                }
+                switchAttacker();
+            }
+        }
+        return attackMessage;
+    }
+
+    protected String enemyTestAttack(int damage){
+        String attackMessage = "Player Turn!";
+        if(attacker == enemy) {
+            if (player.isAlive()) {
+                attackMessage = player.takeDamage(damage);
+                if (!player.isAlive()) {
+                    gameIsOver = true;
+                    battleIsOver = true;
+                }
+                switchAttacker();
+            }
+        }
+        return attackMessage;
+    }
 
 
 }

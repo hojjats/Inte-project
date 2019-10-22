@@ -44,20 +44,20 @@ public class EnemyTest{
 
     @Test
     void takeDamage(){
-        assertEquals(basicEnemy.getName()+" takes "+3+" damage",basicEnemy.takeDamage(3));
+        assertEquals(basicEnemy.getName()+" takes "+3+" damage!",basicEnemy.takeDamage(3));
         assertEquals(basicEnemy.getStrength(),2);
     }
 
     @Test
     void enemyKilled(){
-        assertEquals(basicEnemy.getName()+" dies",basicEnemy.takeDamage(5));
+        assertEquals(basicEnemy.getName()+" Dies!",basicEnemy.takeDamage(5));
         assertFalse(basicEnemy.isAlive());
     }
 
     @Test
     void dealDamageOnKilled(){
         basicEnemy.takeDamage(5);
-        assertEquals(basicEnemy.getName()+" is already dead",basicEnemy.takeDamage(1));
+        assertEquals(basicEnemy.getName()+" is already dead!",basicEnemy.takeDamage(1));
     }
 
 }

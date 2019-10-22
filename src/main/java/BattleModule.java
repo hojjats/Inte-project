@@ -103,7 +103,7 @@ public class BattleModule {
         return gameIsOver;
     }
 
-    private String playerAttack(){
+    public String playerAttack(){
         String attackMessage="Enemy Turn!";
         if(attacker == player) {
             if (enemy.isAlive()) {

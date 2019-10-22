@@ -84,6 +84,4 @@ public class BattleModuleTest {
         assertTrue(battle.isBattleOver());
         assertEquals(9, basicPlayer.getStrength());
     }
-
-
 }

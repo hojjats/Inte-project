@@ -8,3 +8,5 @@
 .idea/**/Project_Default.xml
 target/*
 *.class
+*/target/*
+*/target/**

@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -95,14 +96,15 @@ public class PlayerTest {
     @Test
     void attackWithoutWeapon(){
         int attackStrength = p.attack();
-        assertEquals(attackStrength, 10);
+        System.out.println("Result: " + attackStrength);
+        assertTrue(0 <= attackStrength && attackStrength <= 10);
     }
 
     @Test
     void attackWithWeapon() {
         p.setWeapon(woodAxe);
         int attackStrength = p.attack();
-        assertEquals(attackStrength, (10+4));
+        assertTrue(0 <= attackStrength && attackStrength <= 14);
     }
 
     @Test
@@ -114,10 +116,12 @@ public class PlayerTest {
 
     @Test
     void takeDamageWithArmor(){
+        // Armor rating 6
         p.setArmor(leatherArmor);
-        String str = p.takeDamage(10);
-        assertEquals(p.getStrength(), 6);
-        assertEquals(str, "You take 4 damage!");
+        String str = p.takeDamage(7);
+        int playerStrength = p.getStrength();
+        assertTrue(1 <= playerStrength && playerStrength <= 7);
+        assertEquals(str, "You take "+(10-playerStrength)+" damage!");
     }
 
 }

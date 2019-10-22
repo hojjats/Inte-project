@@ -156,7 +156,21 @@ public class MapTileTest {
         mapTile.setDiscoveredTiles(10);
         mapTile.setEnemyOnTile();
         assertEquals(mapTile.getEnemyOnTile().getStrength(), 3);
+    }
 
+    @Test
+    void setItemOnTile1(){
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(3);
+        mapTile.setItemOnTile();
+        assertTrue(mapTile.getItemOnTile() instanceof Weapon);
+    }
+    @Test
+    void setItemOnTile2(){
+        MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST);
+        mapTile.setDiscoveredTiles(6);
+        mapTile.setItemOnTile();
+        assertTrue(mapTile.getItemOnTile() instanceof Armor);
     }
 
 

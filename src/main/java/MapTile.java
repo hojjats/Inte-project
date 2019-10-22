@@ -14,6 +14,8 @@ public class MapTile {
     private MapTile westTile;
     private Random rand = new Random();
 
+    //TODO: NYA CLASSER: ITEMLIST OCH ENEMYLIST MED GETTERS SOM RETURNERAR BASERAT PÅ TIER. CONTAINERS FÖR ENEMIES OCH ITEMS
+
     //for now until read from file is implemented
     String[] monsterNames = {"Slime", "Blob", "Rat", "Skeleton"};
 
@@ -87,11 +89,25 @@ public class MapTile {
         }
         int speed = 1;
         enemyOnTile = new Enemy(monsterNames[0], strength, speed, true);
-
     }
+
+    public void setItemOnTile() {
+        int itemTier = 0;
+        for (int i = 1; i <= discoveredTiles; i++) {
+            if (i % 3 == 0) {
+                itemTier++;
+                itemOnTile = i % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
+            }
+        }
+    }
+
 
     public Enemy getEnemyOnTile() {
         return enemyOnTile;
+    }
+
+    public Item getItemOnTile() {
+        return itemOnTile;
     }
 
     public Effect getEffect() {

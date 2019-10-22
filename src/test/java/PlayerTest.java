@@ -94,15 +94,18 @@ public class PlayerTest {
 
     @Test
     void attackWithoutWeapon(){
-        int attackStrength = p.attack();
-        assertEquals(attackStrength, 10);
+        Player player = new Player(new mocks.Random());
+        int attackStrength = player.attack();
+        System.out.println("Result: " + attackStrength);
+        assertEquals(10, attackStrength);
     }
 
     @Test
     void attackWithWeapon() {
-        p.setWeapon(woodAxe);
-        int attackStrength = p.attack();
-        assertEquals(attackStrength, (10+4));
+        Player player = new Player(new mocks.Random());
+        player.setWeapon(woodAxe);
+        int attackStrength = player.attack();
+        assertEquals(14, attackStrength);
     }
 
     @Test
@@ -114,10 +117,13 @@ public class PlayerTest {
 
     @Test
     void takeDamageWithArmor(){
-        p.setArmor(leatherArmor);
-        String str = p.takeDamage(10);
-        assertEquals(p.getStrength(), 6);
-        assertEquals(str, "You take 4 damage!");
+        Player player = new Player(new mocks.Random());
+        // Armor rating 6
+        player.setArmor(leatherArmor);
+        String str = player.takeDamage(7);
+        int playerStrength = player.getStrength();
+        assertEquals(9, playerStrength);
+        assertEquals(str, "You take "+(10-playerStrength)+" damage!");
     }
 
 }

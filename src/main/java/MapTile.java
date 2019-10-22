@@ -1,12 +1,20 @@
 public class MapTile {
 
     private Effect effect;
+    private Enemy enemyOnTile;
+    private Item itemOnTile;
+    private static int discoveredTiles;
     private Position position;
     private String name;
     private MapTile northTile;
     private MapTile southTile;
     private MapTile eastTile;
     private MapTile westTile;
+
+    //TODO: NYA CLASSER: ITEMLIST OCH ENEMYLIST MED GETTERS SOM RETURNERAR BASERAT PÅ TIER. CONTAINERS FÖR ENEMIES OCH ITEMS
+
+    //for now until read from file is implemented
+    String[] monsterNames = {"Slime", "Blob", "Rat", "Skeleton"};
 
     // Effect can be null, no effect on tile
     public MapTile(Effect effect, String name, MapTile previousTile, Directions direction) {
@@ -27,10 +35,14 @@ public class MapTile {
         this.effect = effect;
         this.position = new Position(0, 0);
         this.name = name;
+        discoveredTiles++;
+        setEnemyOnTile();
+        setItemOnTile();
     }
 
+
     public void setTile(MapTile prev, Directions dir) {
-        switch (dir){
+        switch (dir) {
             case NORTH:
                 this.setSouthTile(prev);
                 prev.setNorthTile(this);
@@ -67,6 +79,36 @@ public class MapTile {
         }
     }
 
+    public void setEnemyOnTile() {
+        int strength = 1;
+        for (int i = 1; i <= discoveredTiles; i++) {
+            if (i % 5 == 0) {
+                strength++;
+            }
+        }
+        int speed = 1;
+        enemyOnTile = new Enemy(monsterNames[0], strength, speed, true);
+    }
+
+    public void setItemOnTile() {
+        int itemTier = 0;
+        for (int i = 1; i <= discoveredTiles; i++) {
+            if (i % 3 == 0) {
+                itemTier++;
+                itemOnTile = i % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
+            }
+        }
+    }
+
+
+    public Enemy getEnemyOnTile() {
+        return enemyOnTile;
+    }
+
+    public Item getItemOnTile() {
+        return itemOnTile;
+    }
+
     public Effect getEffect() {
         return effect;
     }
@@ -78,6 +120,16 @@ public class MapTile {
     public String getName() {
         return name;
     }
+
+    public int getDiscoveredTiles() {
+        return discoveredTiles;
+    }
+
+    //Just to make tests
+    void setDiscoveredTiles(int discoveredTiles) {
+        this.discoveredTiles = discoveredTiles;
+    }
+
 
     public MapTile getNorthTile() {
         return northTile;

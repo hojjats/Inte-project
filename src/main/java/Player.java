@@ -10,6 +10,11 @@ public class Player extends Creature {
         super(10,10);
     }
 
+    public Player(mocks.Random mockRandom) {
+        super(10, 10);
+        this.Rnd = mockRandom;
+    }
+
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
@@ -62,7 +67,6 @@ public class Player extends Creature {
     @Override
     public String takeDamage(int damageAmount) {
         if (armor != null) {
-            Random Rnd = new Random();
             for (int i = 0; i < armor.getArmorRating(); i++) {
                 int rndInt = Rnd.nextInt((6 - 1) + 1) + 1;
                 if (rndInt == 6) {

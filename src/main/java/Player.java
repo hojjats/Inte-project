@@ -4,10 +4,11 @@ public class Player extends Creature {
 
     private Weapon weapon;
     private Armor armor;
-    private Random Rnd = new Random();
+    private Random Rnd;
 
     public Player(){
         super(10,10);
+        this.Rnd = new Random();
     }
 
     public Player(mocks.Random mockRandom) {

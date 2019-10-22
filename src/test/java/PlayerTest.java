@@ -1,6 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -95,16 +94,18 @@ public class PlayerTest {
 
     @Test
     void attackWithoutWeapon(){
-        int attackStrength = p.attack();
+        Player player = new Player(new mocks.Random());
+        int attackStrength = player.attack();
         System.out.println("Result: " + attackStrength);
-        assertTrue(0 <= attackStrength && attackStrength <= 10);
+        assertEquals(10, attackStrength);
     }
 
     @Test
     void attackWithWeapon() {
-        p.setWeapon(woodAxe);
-        int attackStrength = p.attack();
-        assertTrue(0 <= attackStrength && attackStrength <= 14);
+        Player player = new Player(new mocks.Random());
+        player.setWeapon(woodAxe);
+        int attackStrength = player.attack();
+        assertEquals(14, attackStrength);
     }
 
     @Test
@@ -116,11 +117,12 @@ public class PlayerTest {
 
     @Test
     void takeDamageWithArmor(){
+        Player player = new Player(new mocks.Random());
         // Armor rating 6
-        p.setArmor(leatherArmor);
-        String str = p.takeDamage(7);
-        int playerStrength = p.getStrength();
-        assertTrue(1 <= playerStrength && playerStrength <= 7);
+        player.setArmor(leatherArmor);
+        String str = player.takeDamage(7);
+        int playerStrength = player.getStrength();
+        assertEquals(9, playerStrength);
         assertEquals(str, "You take "+(10-playerStrength)+" damage!");
     }
 

@@ -22,7 +22,6 @@ public class BattleModuleTest {
         BattleModule battle = new BattleModule(basicPlayer,fastEnemy);
 
         assertEquals(battle.getAttacker(),fastEnemy);
-        assertEquals(battle.getDefender(),basicPlayer);
     }
 
     @Test
@@ -35,9 +34,9 @@ public class BattleModuleTest {
 
     @Test
     void switchAttacker() {
-        battle.playerTestAttack(1);
+        battle.playerAttack(1);
         assertEquals(battle.getAttacker(), basicEnemy);
-        battle.enemyTestAttack(1);
+        battle.enemyAttack(1);
         assertEquals(battle.getAttacker(), basicPlayer);
     }
 
@@ -45,44 +44,47 @@ public class BattleModuleTest {
     void damageDealing(){
         Enemy basicEnemy = new Enemy();
         BattleModule battle = new BattleModule(basicPlayer, basicEnemy);
-        assertEquals("Grunt takes 1 damage", battle.playerTestAttack(1));
-        assertEquals("You take 1 damage!",battle.enemyTestAttack(1));
+        assertEquals("Grunt takes 1 damage", battle.playerAttack(1));
+        assertEquals("You take 1 damage!",battle.enemyAttack(1));
     }
 
     @Test
     void playerAttacksOnEnemyTurn(){
-    battle.playerTestAttack(1);
-    assertEquals("Enemy Turn!",battle.playerTestAttack(1));
+    battle.playerAttack(1);
+    assertEquals("Enemy Turn!",battle.playerAttack(1));
     assertEquals(battle.getAttacker(),basicEnemy);
     }
 
     @Test
     void enemyAttacksOnPlayerTurn(){
-        assertEquals("Player Turn!", battle.enemyTestAttack(1));
+        assertEquals("Player Turn!", battle.enemyAttack(1));
         assertEquals(battle.getAttacker(),basicPlayer);
     }
 
     @Test
     void enemyDies(){
-        assertEquals(basicEnemy.getName()+" Dies!",battle.playerTestAttack(2));
+        assertEquals(basicEnemy.getName()+" Dies!",battle.playerAttack(2));
         assertTrue(battle.isBattleOver());
         assertFalse(battle.isGameOver());
     }
 
     @Test
     void playerDies(){
-        battle.playerTestAttack(1);
-        assertEquals("You Died!", battle.enemyTestAttack(10));
-        assertTrue(battle.isBattleOver());
+        battle.playerAttack(1);
+        assertEquals("You Died!", battle.enemyAttack(10));
         assertTrue(battle.isGameOver());
     }
 
     @Test
     void threeAttacksPlayerWin(){
-        battle.playerTestAttack(1);
-        battle.enemyTestAttack(1);
-        assertEquals(basicEnemy.getName()+" Dies!",battle.playerTestAttack(1));
+        battle.playerAttack(1);
+        battle.enemyAttack(1);
+        assertEquals(basicEnemy.getName()+" Dies!",battle.playerAttack(1));
         assertTrue(battle.isBattleOver());
         assertEquals(9, basicPlayer.getStrength());
     }
+
+
+
+
 }

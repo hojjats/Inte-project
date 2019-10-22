@@ -74,7 +74,7 @@ public class BattleModule {
 
         switch (command){
             case 1:
-                playerAttack();
+                playerAttack(player.attack());
                 break;
             case 2:
                 flee();
@@ -84,14 +84,14 @@ public class BattleModule {
 
 
     public void startBattle(){
-        while(!battleIsOver || !gameIsOver){
+        while(!battleIsOver && !gameIsOver){
     /* TO-DO Should lock player and enemy in loop until one dies or player
     manages to flee
      */
         }
     }
 
-    public void flee(){
+    protected void flee(){
         // TO-DO implement flee mechanic based on speed
     }
 
@@ -103,38 +103,7 @@ public class BattleModule {
         return gameIsOver;
     }
 
-    public String playerAttack(){
-        String attackMessage="Enemy Turn!";
-        if(attacker == player) {
-            if (enemy.isAlive()) {
-               attackMessage = enemy.takeDamage(player.attack());
-                if (!enemy.isAlive()) {
-                    battleIsOver = true;
-                }
-                switchAttacker();
-            }
-        }
-        return attackMessage;
-    }
-
-    private String enemyAttack(){
-        String attackMessage = "Player Turn!";
-        if(attacker == enemy) {
-            if (player.isAlive()) {
-             attackMessage = player.takeDamage(enemy.attack());
-                 if (!player.isAlive()) {
-                      gameIsOver = true;
-                      battleIsOver = true;
-                 }
-                 switchAttacker();
-            }
-        }
-        return attackMessage;
-    }
-
-
-
-    protected String playerTestAttack(int damage){
+    protected String playerAttack(int damage){
         String attackMessage="Enemy Turn!";
         if(attacker == player) {
             if (enemy.isAlive()) {
@@ -148,20 +117,20 @@ public class BattleModule {
         return attackMessage;
     }
 
-    protected String enemyTestAttack(int damage){
+
+    protected String enemyAttack(int damage){
         String attackMessage = "Player Turn!";
         if(attacker == enemy) {
             if (player.isAlive()) {
-                attackMessage = player.takeDamage(damage);
-                if (!player.isAlive()) {
-                    gameIsOver = true;
-                    battleIsOver = true;
-                }
-                switchAttacker();
+             attackMessage = player.takeDamage(damage);
+                 if (!player.isAlive()) {
+                      gameIsOver = true;
+                      battleIsOver = true;
+                 }
+                 switchAttacker();
             }
         }
         return attackMessage;
     }
-
 
 }

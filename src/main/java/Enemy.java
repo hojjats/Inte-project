@@ -14,6 +14,13 @@ public class Enemy extends Creature {
         isAlive=true;
     }
 
+    public Enemy(mocks.Random mockRandom) {
+        super(5,5);
+        this.Rnd = mockRandom;
+        isAggressive = false;
+        name = "Lucky Lucy";
+    }
+
     public Enemy(){
         super(5,5);
         isAggressive=false;

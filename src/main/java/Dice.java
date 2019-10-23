@@ -23,4 +23,6 @@ public class Dice {
         return successfulRolls;
     }
 
+    public int rollDice(){ return rnd.nextInt(6)+1 ;}
+
 }

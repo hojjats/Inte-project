@@ -68,6 +68,10 @@ public class Player extends Creature {
         return "You take "+damageAmount+" damage!";
     }
 
+    public Dice getDice(){
+        return dice;
+    }
+
     @Override
     public String toString() {
         return "Player{" +

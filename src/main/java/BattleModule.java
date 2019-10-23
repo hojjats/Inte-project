@@ -1,23 +1,29 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class BattleModule {
 
-    private Creature attacker;
-    private Creature defender;
     private Player player;
     private Enemy enemy;
-    private int playerInitiativeScore;
-    private int enemyInitiativeScore;
     private boolean battleIsOver = false;
     private boolean gameIsOver = false;
+    private boolean playerTurn;
+    private Scanner scan;
 
     public BattleModule(Player player,Enemy enemy){
         this.player = player;
         this.enemy = enemy;
-        this.attacker = player;
-        this.defender = enemy;
         setBattleInitiative(player.getSpeed()-enemy.getSpeed());
+        scan = new Scanner(System.in);
     }
+
+    public BattleModule(Player player,Enemy enemy,String input){
+        this.player = player;
+        this.enemy = enemy;
+        setBattleInitiative(player.getSpeed()-enemy.getSpeed());
+        scan = new Scanner(input);
+    }
+
+
 
     /* Checks creatures speed to determine who starts attacking
     if creatures have the same speed, the attacker is randomized*/
@@ -25,50 +31,26 @@ public class BattleModule {
         if(initiative==0){
             randomizeInitiative();
         }
-        else if(initiative<0){
-          switchAttacker();
+        else {
+            playerTurn = initiative>0;
         }
 
     }
 
     private void randomizeInitiative(){
         int initiative;
-        Random rnd = new Random();
+
         do {
-            initiative = rnd.nextInt(20)-10;
+            initiative = player.getDice().rollDice()-enemy.getDice().rollDice();
         }while (initiative == 0);
 
-        if(initiative > 0) {
-            attacker = player;
-            defender = enemy;
-            playerInitiativeScore = 1;
-            enemyInitiativeScore = 0;
-        }else{
-            attacker = enemy;
-            defender = player;
-            playerInitiativeScore = 0;
-            enemyInitiativeScore = 1;
-        }
-    }
-
-    public Creature getAttacker(){
-        return attacker;
-    }
-
-    public Creature getDefender(){
-        return defender;
-    }
-
-    public Creature highestInitiative(){
-        return playerInitiativeScore>enemyInitiativeScore ? player:enemy;
+        playerTurn = initiative > 0;
     }
 
     private void switchAttacker(){
-       Creature temp = null;
-       temp = attacker;
-       attacker = defender;
-       defender = temp;
+        playerTurn = !playerTurn;
     }
+
 
     public void battleCommand(int command){
 
@@ -105,7 +87,10 @@ public class BattleModule {
 
     protected String playerAttack(int damage){
         String attackMessage="Enemy Turn!";
-        if(attacker == player) {
+        if(battleIsOver || gameIsOver){
+            return "Battle has ended";
+        }
+        if(playerTurn) {
             if (enemy.isAlive()) {
                 attackMessage = enemy.takeDamage(damage);
                 if (!enemy.isAlive()) {
@@ -117,15 +102,16 @@ public class BattleModule {
         return attackMessage;
     }
 
-
     protected String enemyAttack(int damage){
         String attackMessage = "Player Turn!";
-        if(attacker == enemy) {
+        if(battleIsOver || gameIsOver){
+            return "Battle has ended";
+        }
+        if(!playerTurn) {
             if (player.isAlive()) {
              attackMessage = player.takeDamage(damage);
                  if (!player.isAlive()) {
                       gameIsOver = true;
-                      battleIsOver = true;
                  }
                  switchAttacker();
             }
@@ -133,4 +119,7 @@ public class BattleModule {
         return attackMessage;
     }
 
+    public boolean isPlayerTurn() {
+        return playerTurn;
+    }
 }

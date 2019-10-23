@@ -15,6 +15,10 @@ public class Enemy extends Creature {
         this.dice = dice;
     }
 
+    public Enemy(Dice dice){
+        this("Grunt", 2,5, false,dice);
+    }
+
     public Enemy(){
         this("Grunt", 2,5, false);
     }
@@ -42,6 +46,10 @@ public class Enemy extends Creature {
         setStrength(getStrength()-damageAmount);
         return name +" takes "+ damageAmount+" damage";
     }
+
+   public Dice getDice(){
+        return dice;
+   }
 
 
 

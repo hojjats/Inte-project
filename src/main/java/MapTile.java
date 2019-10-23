@@ -80,23 +80,15 @@ public class MapTile {
     }
 
     public void setEnemyOnTile() {
-        int strength = 1;
-        for (int i = 1; i <= discoveredTiles; i++) {
-            if (i % 5 == 0) {
-                strength++;
-            }
-        }
+        int strength = (discoveredTiles / 5) + 1;
         int speed = 1;
         enemyOnTile = new Enemy("Slime", strength, speed, true);
     }
 
     public void setItemOnTile() {
-        int itemTier = 0;
-        for (int i = 1; i <= discoveredTiles; i++) {
-            if (i % 3 == 0) {
-                itemTier++;
-                itemOnTile = i % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
-            }
+        int itemTier = (discoveredTiles / 5) + 1;
+        if (discoveredTiles % 3 == 0) {
+            itemOnTile = discoveredTiles % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
         }
     }
 

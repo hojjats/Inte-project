@@ -194,6 +194,34 @@ public class MapTileTest {
         assertTrue(mapTile.getItemOnTile() instanceof Armor);
     }
 
+    @Test
+    void setNorthTileNull(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            startTile.setNorthTile(null);
+        });
+    }
+
+    @Test
+    void setSouthTileNull(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            startTile.setSouthTile(null);
+        });
+    }
+
+    @Test
+    void setWestTileNull(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            startTile.setWestTile(null);
+        });
+    }
+
+    @Test
+    void setEastTileNull(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            startTile.setEastTile(null);
+        });
+    }
+
 
     @Test
     void getEffect() {
@@ -213,6 +241,7 @@ public class MapTileTest {
         MapTile maptile = new MapTile(new Effect(), "HeroStorm");
         assertEquals(maptile.getName(), "HeroStorm");
     }
+
 
     @Test
     void setTile() {

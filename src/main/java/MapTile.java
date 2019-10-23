@@ -139,18 +139,26 @@ public class MapTile {
     }
 
     public void setNorthTile(MapTile northTile) {
+        if (northTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.northTile = northTile;
     }
 
     public void setSouthTile(MapTile southTile) {
+        if (southTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.southTile = southTile;
     }
 
     public void setEastTile(MapTile eastTile) {
+        if (eastTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.eastTile = eastTile;
     }
 
     public void setWestTile(MapTile westTile) {
+        if (westTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.westTile = westTile;
     }
 }

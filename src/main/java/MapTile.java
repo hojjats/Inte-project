@@ -3,7 +3,7 @@ public class MapTile {
     private Effect effect;
     private Enemy enemyOnTile;
     private Item itemOnTile;
-    private static int discoveredTiles;
+    private int discoveredTiles;
     private Position position;
     private String name;
     private MapTile northTile;
@@ -13,16 +13,16 @@ public class MapTile {
 
     //TODO: NYA CLASSER: ITEMLIST OCH ENEMYLIST MED GETTERS SOM RETURNERAR BASERAT PÅ TIER. CONTAINERS FÖR ENEMIES OCH ITEMS
 
-    //for now until read from file is implemented
-    String[] monsterNames = {"Slime", "Blob", "Rat", "Skeleton"};
-
     // Effect can be null, no effect on tile
-    public MapTile(Effect effect, String name, MapTile previousTile, Directions direction) {
+    public MapTile(Effect effect, String name, MapTile previousTile, Directions direction, int discoveredTiles) {
         this(effect, name);
         if (previousTile == null)
             throw new IllegalArgumentException("PreviousTile can't be null");
         if (direction == null)
             throw new IllegalArgumentException("Direction can't be null");
+        if (discoveredTiles <= 0)
+            throw new IllegalArgumentException("Discovered tiles can't be zero or less");
+        this.discoveredTiles = discoveredTiles;
         setPosition(previousTile, direction);
         setTile(previousTile, direction);
     }
@@ -35,7 +35,7 @@ public class MapTile {
         this.effect = effect;
         this.position = new Position(0, 0);
         this.name = name;
-        discoveredTiles++;
+        this.discoveredTiles = 1;
         setEnemyOnTile();
         setItemOnTile();
     }
@@ -87,7 +87,7 @@ public class MapTile {
             }
         }
         int speed = 1;
-        enemyOnTile = new Enemy(monsterNames[0], strength, speed, true);
+        enemyOnTile = new Enemy("Slime", strength, speed, true);
     }
 
     public void setItemOnTile() {
@@ -99,7 +99,6 @@ public class MapTile {
             }
         }
     }
-
 
     public Enemy getEnemyOnTile() {
         return enemyOnTile;

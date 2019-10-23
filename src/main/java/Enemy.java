@@ -1,20 +1,18 @@
-import java.util.Random;
-
 public class Enemy extends Creature {
 
     private boolean isAggressive;
     private String name;
-    private Random rnd;
+    private Dice dice;
 
     public Enemy(String name,int strength,int speed, boolean isAggressive){
-        this(name, strength, speed, isAggressive, new Random());
+        this(name, strength, speed, isAggressive, new Dice());
     }
 
-    public Enemy(String name,int strength,int speed, boolean isAggressive, Random rnd) {
+    public Enemy(String name,int strength,int speed, boolean isAggressive, Dice dice) {
         super(speed,strength);
         this.isAggressive = isAggressive;
         this.name = name;
-        this.rnd = rnd;
+        this.dice = dice;
     }
 
     public Enemy(){
@@ -22,14 +20,7 @@ public class Enemy extends Creature {
     }
 
     public int attack(){
-        int damage = 0;
-        for (int i = 0; i < getStrength(); i++) {
-            int rndInt = rnd.nextInt((6-1) +1) +1;
-            if (rndInt == 6) {
-                damage++;
-            }
-        }
-        return damage;
+        return dice.roll(getStrength(), 6);
     }
 
     public String getName(){

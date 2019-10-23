@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
     Player p = new Player();
+    Player loadedPlayer = new Player(new Dice(new mocks.Random(6)));
     Weapon woodAxe = new Weapon("Wood Axe", 4);
     Armor leatherArmor = new Armor("Leather Armor", 6);
 
@@ -94,17 +95,15 @@ public class PlayerTest {
 
     @Test
     void attackWithoutWeapon(){
-        Player player = new Player(new mocks.Random());
-        int attackStrength = player.attack();
+        int attackStrength = loadedPlayer.attack();
         System.out.println("Result: " + attackStrength);
         assertEquals(10, attackStrength);
     }
 
     @Test
     void attackWithWeapon() {
-        Player player = new Player(new mocks.Random());
-        player.setWeapon(woodAxe);
-        int attackStrength = player.attack();
+        loadedPlayer.setWeapon(woodAxe);
+        int attackStrength = loadedPlayer.attack();
         assertEquals(14, attackStrength);
     }
 
@@ -117,11 +116,10 @@ public class PlayerTest {
 
     @Test
     void takeDamageWithArmor(){
-        Player player = new Player(new mocks.Random());
         // Armor rating 6
-        player.setArmor(leatherArmor);
-        String str = player.takeDamage(7);
-        int playerStrength = player.getStrength();
+        loadedPlayer.setArmor(leatherArmor);
+        String str = loadedPlayer.takeDamage(7);
+        int playerStrength = loadedPlayer.getStrength();
         assertEquals(9, playerStrength);
         assertEquals(str, "You take "+(10-playerStrength)+" damage!");
     }

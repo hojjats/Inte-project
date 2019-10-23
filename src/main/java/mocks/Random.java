@@ -2,15 +2,14 @@ package mocks;
 
 public class Random extends java.util.Random {
 
-    public Random() {}
+    int returnValue;
 
-    @Override
-    public int nextInt() {
-        return 5;
+    public Random(int value) {
+        this.returnValue = value - 1;
     }
 
     @Override
     public int nextInt(int bound) {
-        return 5;
+        return returnValue;
     }
 }

@@ -1,18 +1,16 @@
-import java.util.Random;
-
 public class Player extends Creature {
 
     private Weapon weapon;
     private Armor armor;
-    private Random rnd;
+    private Dice dice;
 
     public Player(){
-        this(new Random());
+        this(new Dice());
     }
 
-    public Player(Random rnd) {
+    public Player(Dice dice) {
         super(10, 10);
-        this.rnd = rnd;
+        this.dice = dice;
     }
 
     public void setArmor(Armor armor) {
@@ -45,14 +43,7 @@ public class Player extends Creature {
         if (weapon != null) {
             rolls += weapon.getDamage();
         }
-        int damage = 0;
-        for (int i = 0; i < rolls; i++) {
-            int rndInt = rnd.nextInt((6 - 1) + 1) + 1;
-            if (rndInt == 6) {
-                damage++;
-            }
-        }
-        return damage;
+        return dice.roll(rolls, 6);
     }
 
     /**
@@ -67,12 +58,7 @@ public class Player extends Creature {
     @Override
     public String takeDamage(int damageAmount) {
         if (armor != null) {
-            for (int i = 0; i < armor.getArmorRating(); i++) {
-                int rndInt = rnd.nextInt((6 - 1) + 1) + 1;
-                if (rndInt == 6) {
-                    damageAmount--;
-                }
-            }
+            damageAmount -= dice.roll(armor.getArmorRating(), 6);
         }
         if(getStrength()<=damageAmount){
             die();

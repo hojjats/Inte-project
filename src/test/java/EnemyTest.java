@@ -39,7 +39,7 @@ public class EnemyTest{
 
     @Test
     void attack(){
-        Enemy enemy = new Enemy("Lucky", 5,5, true, new mocks.Random());
+        Enemy enemy = new Enemy("Lucky", 5,5, true, new Dice(new  mocks.Random(6)));
         assertEquals(5, enemy.attack());
     }
 
@@ -51,7 +51,7 @@ public class EnemyTest{
 
     @Test
     void enemyKilled(){
-        assertEquals(basicEnemy.getName()+" dies",basicEnemy.takeDamage(5));
+        assertEquals(basicEnemy.getName()+" Dies!",basicEnemy.takeDamage(5));
         assertFalse(basicEnemy.isAlive());
     }
 

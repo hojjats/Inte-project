@@ -80,23 +80,15 @@ public class MapTile {
     }
 
     public void setEnemyOnTile() {
-        int strength = 1;
-        for (int i = 1; i <= discoveredTiles; i++) {
-            if (i % 5 == 0) {
-                strength++;
-            }
-        }
+        int strength = (discoveredTiles / 5) + 1;
         int speed = 1;
         enemyOnTile = new Enemy("Slime", strength, speed, true);
     }
 
     public void setItemOnTile() {
-        int itemTier = 0;
-        for (int i = 1; i <= discoveredTiles; i++) {
-            if (i % 3 == 0) {
-                itemTier++;
-                itemOnTile = i % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
-            }
+        int itemTier = (discoveredTiles / 5) + 1;
+        if (discoveredTiles % 3 == 0) {
+            itemOnTile = discoveredTiles % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
         }
     }
 
@@ -147,18 +139,26 @@ public class MapTile {
     }
 
     public void setNorthTile(MapTile northTile) {
+        if (northTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.northTile = northTile;
     }
 
     public void setSouthTile(MapTile southTile) {
+        if (southTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.southTile = southTile;
     }
 
     public void setEastTile(MapTile eastTile) {
+        if (eastTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.eastTile = eastTile;
     }
 
     public void setWestTile(MapTile westTile) {
+        if (westTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
         this.westTile = westTile;
     }
 }

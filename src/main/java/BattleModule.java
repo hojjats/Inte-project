@@ -29,22 +29,19 @@ public class BattleModule {
     if creatures have the same speed, the attacker is randomized*/
     private void setBattleInitiative(int initiative){
         if(initiative==0){
-            randomizeInitiative();
+           playerTurn = roll() > 0;
         }
         else {
-            playerTurn = initiative>0;
+            playerTurn = initiative > 0;
         }
-
     }
 
-    private void randomizeInitiative(){
-        int initiative;
-
+    private int roll(){
+        int winner;
         do {
-            initiative = player.getDice().rollDice()-enemy.getDice().rollDice();
-        }while (initiative == 0);
-
-        playerTurn = initiative > 0;
+            winner = player.getDice().rollDice()-enemy.getDice().rollDice();
+        }while (winner == 0);
+        return winner;
     }
 
     private void switchAttacker(){
@@ -74,7 +71,7 @@ public class BattleModule {
     }
 
     protected void flee(){
-        // TO-DO implement flee mechanic based on speed
+        battleIsOver = roll() > 0;
     }
 
     public boolean isBattleOver() {

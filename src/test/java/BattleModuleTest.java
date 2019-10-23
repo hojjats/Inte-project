@@ -111,13 +111,15 @@ public class BattleModuleTest {
     @Test
     void fleeSuccess(){
         BattleModule fleeSuccess = new BattleModule(loadedPlayer,failingEnemy);
-        assertEquals(fleeSuccess.isBattleOver(),true);
+        fleeSuccess.flee();
+        assertTrue(fleeSuccess.isBattleOver());
     }
 
     @Test
     void fleeFailure(){
         BattleModule fleeFailure = new BattleModule(failingPlayer,loadedEnemy);
-        assertEquals(fleeFailure.isBattleOver(),false);
+        fleeFailure.flee();
+        assertFalse(fleeFailure.isBattleOver());
 
     }
 

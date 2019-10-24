@@ -59,7 +59,7 @@ public class BattleModuleTest {
     void damageDealing(){
         Enemy basicEnemy = new Enemy();
         BattleModule battle = new BattleModule(basicPlayer, basicEnemy);
-        assertEquals("Grunt takes 1 damage", battle.playerAttack(1));
+        assertEquals(basicEnemy.getName()+" takes 1 damage", battle.playerAttack(1));
         assertEquals("You take 1 damage!",battle.enemyAttack(1));
     }
 
@@ -161,7 +161,6 @@ public class BattleModuleTest {
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());
     }
-
 
 
 }

@@ -51,7 +51,7 @@ public class EnemyTest{
 
     @Test
     void enemyKilled(){
-        assertEquals(basicEnemy.getName()+" Dies!",basicEnemy.takeDamage(5));
+        assertEquals(basicEnemy.getName()+" takes 5 damage and Dies!",basicEnemy.takeDamage(5));
         assertFalse(basicEnemy.isAlive());
     }
 

@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MapTile {
 
     private Effect effect;
@@ -63,20 +65,25 @@ public class MapTile {
     }
 
     private void setPosition(MapTile prev, Directions dir) {
+        this.position = getNewPosition(prev,dir);
+    }
+
+    public Position getNewPosition(MapTile prev, Directions dir) {
         switch (dir) {
             case EAST:
-                this.position = new Position(prev.getPosition().getX() + 1, prev.getPosition().getY());
-                break;
+                return new Position(prev.getPosition().getX() + 1, prev.getPosition().getY());
+
             case NORTH:
-                this.position = new Position(prev.getPosition().getX(), prev.getPosition().getY() + 1);
-                break;
+                return new Position(prev.getPosition().getX(), prev.getPosition().getY() + 1);
+
             case WEST:
-                this.position = new Position(prev.getPosition().getX() - 1, prev.getPosition().getY());
-                break;
+                return new Position(prev.getPosition().getX() - 1, prev.getPosition().getY());
+
             case SOUTH:
-                this.position = new Position(prev.getPosition().getX(), prev.getPosition().getY() - 1);
-                break;
+                return new Position(prev.getPosition().getX(), prev.getPosition().getY() - 1);
+
         }
+        return null;
     }
 
     public void setEnemyOnTile() {
@@ -148,6 +155,19 @@ public class MapTile {
         if (southTile == null)
             throw new IllegalArgumentException("Tile can't be set to null");
         this.southTile = southTile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MapTile)) return false;
+        MapTile mapTile = (MapTile) o;
+        return position.equals(mapTile.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 
     public void setEastTile(MapTile eastTile) {

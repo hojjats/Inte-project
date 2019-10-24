@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
-    private Game game = new Game(6);
-    private Player player = game.getPlayer();
+    //private Game game = new Game(6);
+    //private Player player = game.getPlayer();
 
 
   /**  @Test
@@ -39,6 +39,8 @@ public class GameTest {
         game.movePlayer(Directions.WEST);
         assertEquals(expected,player.getPosition());
     }**/
+
+
 
 
 }

@@ -1,3 +1,4 @@
+
 public class Position {
 
     int x;
@@ -29,5 +30,10 @@ public class Position {
             return (x==((Position) o).getX() && y== ((Position) o).getY());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return x + y;
     }
 }

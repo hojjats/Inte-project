@@ -4,8 +4,68 @@ import org.junit.jupiter.api.Test;
 
 
 class GameMapTest {
-    /*GameMap basicMap = new GameMap(6);
 
+    GameMap gameMap = new GameMap();
+    MapTile startTile = new MapTile(new Effect(), "startTile");
+
+
+    @Test
+    void createGameMap() {
+        assertEquals(gameMap.getTile(new Position(0, 0)), startTile);
+    }
+
+    @Test
+    void getDirectionNorth() {
+        assertEquals(Directions.NORTH, gameMap.getDirection(startTile, new Position(0, 1)));
+    }
+
+    @Test
+    void getDirectionSouth() {
+        assertEquals(Directions.SOUTH, gameMap.getDirection(startTile, new Position(0, -1)));
+    }
+
+    @Test
+    void getDirectionWest() {
+        assertEquals(Directions.WEST, gameMap.getDirection(startTile, new Position(-1, 0)));
+    }
+
+    @Test
+    void getDirectionEast() {
+        assertEquals(Directions.EAST, gameMap.getDirection(startTile, new Position(1, 0)));
+    }
+
+    @Test
+    void moveToExistingTileDiscoveredTiles() {
+        MapTile newTile = gameMap.move(startTile, new Position(0, 1));
+        int discoveredTilesBeforeMoveBack = gameMap.getDiscoveredTiles();
+        gameMap.move(newTile, new Position(0, 0));
+        int discoveredTilesAfterMoveBack = gameMap.getDiscoveredTiles();
+        assertEquals(discoveredTilesBeforeMoveBack, discoveredTilesAfterMoveBack);
+    }
+
+    @Test
+    void moveBackAndForth(){
+        MapTile newTile = gameMap.move(startTile, new Position(0, 1));
+        assertEquals(startTile.getDiscoveredTiles(), gameMap.move(newTile, new Position(0, 0)).getDiscoveredTiles());
+    }
+
+
+    @Test
+    void moveIncrementsDiscoveredTiles() {
+        int discoveredTilesBeforeMove = gameMap.getDiscoveredTiles();
+        gameMap.move(gameMap.getStartTile(), new Position(0, 1));
+        int discoveredTilesAfterMove = gameMap.getDiscoveredTiles();
+        assertEquals(discoveredTilesBeforeMove + 1, discoveredTilesAfterMove);
+    }
+
+    @Test
+    void moveToNonExistingTile() {
+        int beforeMove = gameMap.getDiscoveredTiles();
+        assertEquals(gameMap.move(gameMap.getStartTile(), new Position(0, 1)), new MapTile(new Effect(), "tile:" + 1, gameMap.getStartTile(), gameMap.getDirection(gameMap.getStartTile(),new Position(0,1)), gameMap.getDiscoveredTiles()));
+        assertEquals(beforeMove+1, gameMap.getDiscoveredTiles());
+    }
+
+    /*GameMap basicMap = new GameMap(6);
 
     @Test
     void getMaptiles(){
@@ -51,12 +111,7 @@ class GameMapTest {
 
 */
 
-    @Test
-    void createGameMap() {
-        GameMap gameMap = new GameMap();
-        assertEquals(gameMap.getTile(new Position(0, 0)), new MapTile(new Effect(), "startTile"));
-    }
-/*
+    /*
     @Test
     void moveToExisting(){
         GameMap gm = new GameMap();
@@ -72,70 +127,5 @@ class GameMapTest {
         int tilesAfterMove = gameMap.getDiscoveredTiles();
         assertEquals(tilesBeforeMove, tilesAfterMove);
     }*/
-
-    @Test
-    void getDirectionNorth() {
-        GameMap gameMap = new GameMap();
-        MapTile startTile = new MapTile(new Effect(), "startTile");
-        assertEquals(Directions.NORTH, gameMap.getDirection(startTile, new Position(0, 1)));
-    }
-
-    @Test
-    void getDirectionSouth() {
-        GameMap gameMap = new GameMap();
-        MapTile startTile = new MapTile(new Effect(), "startTile");
-        assertEquals(Directions.SOUTH, gameMap.getDirection(startTile, new Position(0, -1)));
-    }
-
-    @Test
-    void getDirectionWest() {
-        GameMap gameMap = new GameMap();
-        MapTile startTile = new MapTile(new Effect(), "startTile");
-        assertEquals(Directions.WEST, gameMap.getDirection(startTile, new Position(-1, 0)));
-    }
-
-    @Test
-    void getDirectionEast() {
-        GameMap gameMap = new GameMap();
-        MapTile startTile = new MapTile(new Effect(), "startTile");
-        assertEquals(Directions.EAST, gameMap.getDirection(startTile, new Position(1, 0)));
-    }
-
-    @Test
-    void moveToExistingTileDiscoveredTiles() {
-        GameMap gameMap = new GameMap();
-        MapTile startTile = new MapTile(new Effect(), "startTile");
-        MapTile newTile = gameMap.move(startTile, new Position(0, 1));
-        int discoveredTilesBeforeMoveBack = gameMap.getDiscoveredTiles();
-        gameMap.move(newTile, new Position(0, 0));
-        int discoveredTilesAfterMoveBack = gameMap.getDiscoveredTiles();
-        assertEquals(discoveredTilesBeforeMoveBack, discoveredTilesAfterMoveBack);
-    }
-
-    @Test
-    void moveBackAndForth(){
-        GameMap gameMap = new GameMap();
-        MapTile startTile = new MapTile(new Effect(), "startTile");
-        MapTile newTile = gameMap.move(startTile, new Position(0, 1));
-        assertEquals(startTile.getDiscoveredTiles(), gameMap.move(newTile, new Position(0, 0)).getDiscoveredTiles());
-    }
-
-
-    @Test
-    void moveIncrementsDiscoveredTiles() {
-        GameMap gameMap = new GameMap();
-        int discoveredTilesBeforeMove = gameMap.getDiscoveredTiles();
-        gameMap.move(gameMap.getStartTile(), new Position(0, 1));
-        int discoveredTilesAfterMove = gameMap.getDiscoveredTiles();
-        assertEquals(discoveredTilesBeforeMove + 1, discoveredTilesAfterMove);
-    }
-
-    @Test
-    void moveToNonExistingTile() {
-        GameMap gameMap = new GameMap();
-        int beforeMove = gameMap.getDiscoveredTiles();
-        assertEquals(gameMap.move(gameMap.getStartTile(), new Position(0, 1)), new MapTile(new Effect(), "tile:" + 1, gameMap.getStartTile(), gameMap.getDirection(gameMap.getStartTile(),new Position(0,1)), gameMap.getDiscoveredTiles()));
-        assertEquals(beforeMove+1, gameMap.getDiscoveredTiles());
-    }
 
 }

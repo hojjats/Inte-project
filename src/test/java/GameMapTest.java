@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 
 class GameMapTest {
-    GameMap basicMap = new GameMap(6);
+    /*GameMap basicMap = new GameMap(6);
 
 
     @Test
@@ -51,7 +51,70 @@ class GameMapTest {
         assertEquals(6, basicMap.getDimensions());
     }
 
+*/
 
+    @Test
+    void createGameMap() {
+        GameMap gameMap = new GameMap();
+        assertEquals(gameMap.getTile(new Position(0, 0)), new MapTile(new Effect(), "startTile"));
+    }
+/*
+    @Test
+    void moveToExisting(){
+        GameMap gm = new GameMap();
+        assertEquals(gm.move(new Position(0,0)), gm.getTile(new Position(0,0)));
+    }
 
+    @Test
+    void MoveToNonExisting(){
+        GameMap gm = new GameMap();
+
+    }
+
+    @Test
+    void moveToNonExistingTile() {
+        GameMap gameMap = new GameMap();
+        int tilesBeforeMove = gameMap.getDiscoveredTiles();
+        gameMap.move(new Position(0, 1));
+        int tilesAfterMove = gameMap.getDiscoveredTiles();
+        assertEquals(tilesBeforeMove + 1, tilesAfterMove);
+    }
+
+    @Test
+    void moveToExistingTile() {
+        GameMap gameMap = new GameMap();
+        int tilesBeforeMove = gameMap.getDiscoveredTiles();
+        gameMap.move(new Position(0, 0));
+        int tilesAfterMove = gameMap.getDiscoveredTiles();
+        assertEquals(tilesBeforeMove, tilesAfterMove);
+    }*/
+
+    @Test
+    void getDirectionNorth() {
+        GameMap gameMap = new GameMap();
+        MapTile startTile = new MapTile(new Effect(), "startTile");
+        assertEquals(Directions.NORTH, gameMap.getDirection(startTile, new Position(0, 1)));
+    }
+
+    @Test
+    void getDirectionSouth() {
+        GameMap gameMap = new GameMap();
+        MapTile startTile = new MapTile(new Effect(), "startTile");
+        assertEquals(Directions.SOUTH, gameMap.getDirection(startTile, new Position(0,-1)));
+    }
+
+    @Test
+    void getDirectionWest() {
+        GameMap gameMap = new GameMap();
+        MapTile startTile = new MapTile(new Effect(), "startTile");
+        assertEquals(Directions.WEST, gameMap.getDirection(startTile, new Position(-1,0)));
+    }
+
+    @Test
+    void getDirectionEast() {
+        GameMap gameMap = new GameMap();
+        MapTile startTile = new MapTile(new Effect(), "startTile");
+        assertEquals(Directions.EAST, gameMap.getDirection(startTile, new Position(1,0)));
+    }
 
 }

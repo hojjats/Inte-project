@@ -2,11 +2,11 @@ public class Game {
 
     private GameMap gameMap;
     private Player player;
-
+/*
     public Game(int dimensions){
         gameMap = new GameMap(dimensions);
         player = new Player();
-    }
+    }*/
 
    /** public void movePlayer(Directions direction){
         Position tempPos = null;
@@ -30,12 +30,14 @@ public class Game {
         }
     }**/
 
-    public Player getPlayer(){
+
+
+   /* public Player getPlayer(){
         return player;
     }
 
     private boolean validatePosition(Position pos) {
-        return gameMap.validatePosition(pos);
-    }
+        return gameMap.validatePosition(pos);*/
+    //}
 
 }

@@ -1,8 +1,6 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BattleModuleTest {
@@ -120,25 +118,40 @@ public class BattleModuleTest {
         BattleModule fleeFailure = new BattleModule(failingPlayer,loadedEnemy);
         fleeFailure.flee();
         assertFalse(fleeFailure.isBattleOver());
-
     }
 
     @Test
-    void attackStream(){
-        BattleModule streamBattle = new BattleModule(loadedPlayer,basicEnemy,"1");
-        assertEquals(1,basicEnemy.getStrength());
+    void fleeOnEnemyTurn(){
+        battle.playerAttack(1);
+        assertEquals("Enemy Turn!",battle.flee());
+        assertFalse(battle.isPlayerTurn());
+    }
+
+    @Test
+    void attackThenFleeStream(){
+        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,"1 2");
+        loadedPlayer.setStrength(1);
+        streamBattle.startBattle();
+        assertEquals(1,failingEnemy.getStrength());
+        assertTrue(streamBattle.isBattleOver());
     }
 
     @Test
     void attackStreamUntilEnemyDead(){
-        BattleModule streamBattle = new BattleModule(loadedPlayer,basicEnemy,"1 1");
-        assertEquals(streamBattle.isBattleOver(),true);
-        assertEquals(0,basicEnemy.getStrength());
+        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,"1 1");
+        loadedPlayer.setStrength(1);
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isBattleOver());
+        assertFalse(failingEnemy.isAlive());
     }
 
     @Test
-    void attackStreamOneAttackThenFlee(){
-
+    void playerStartAndGetsKilled(){
+        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,"1 2");
+        failingPlayer.setStrength(4);
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isGameOver());
+        assertFalse(failingPlayer.isAlive());
     }
 
 

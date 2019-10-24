@@ -26,7 +26,8 @@ public class BattleModule {
 
 
     /* Checks creatures speed to determine who starts attacking
-    if creatures have the same speed, the attacker is randomized*/
+    if creatures have the same speed, both enemy and player rolls and the one with the highest roll
+    starts the battle*/
     private void setBattleInitiative(int initiative){
         if(initiative==0){
            playerTurn = roll() > 0;
@@ -49,29 +50,40 @@ public class BattleModule {
     }
 
 
-    public void battleCommand(int command){
+    private void battleCommand(int command){
 
         switch (command){
             case 1:
-                playerAttack(player.attack());
+                System.out.println(playerAttack(player.attack()));
                 break;
             case 2:
-                flee();
+                System.out.println(flee());
                 break;
         }
     }
 
 
     public void startBattle(){
-        while(!battleIsOver && !gameIsOver){
-    /* TO-DO Should lock player and enemy in loop until one dies or player
-    manages to flee
-     */
-        }
+
+        do{
+            int command = scan.nextInt();
+            battleCommand(command);
+            if(!battleIsOver){
+                System.out.println(enemyAttack(enemy.attack()));
+            }
+        }while(!battleIsOver && !gameIsOver);
     }
 
-    protected void flee(){
-        battleIsOver = roll() > 0;
+    protected String flee(){
+        String fleeMessage = "You attempt to flee";
+        if(playerTurn){
+            battleIsOver = roll() > 0;
+            switchAttacker();
+        }else {
+            return "Enemy Turn!";
+        }
+        fleeMessage = battleIsOver ? fleeMessage+" and succeed!":fleeMessage+" but fail!";
+        return fleeMessage;
     }
 
     public boolean isBattleOver() {

@@ -76,7 +76,7 @@ public class BattleModuleTest {
 
     @Test
     void enemyDies(){
-        assertEquals(basicEnemy.getName()+" Dies!",battle.playerAttack(2));
+        assertEquals(basicEnemy.getName()+" takes 2 damage and Dies!",battle.playerAttack(2));
         assertTrue(battle.isBattleOver());
         assertFalse(battle.isGameOver());
     }
@@ -84,7 +84,7 @@ public class BattleModuleTest {
     @Test
     void playerDies(){
         battle.playerAttack(1);
-        assertEquals("You Died!", battle.enemyAttack(10));
+        assertEquals("You take 10 damage and Die!", battle.enemyAttack(10));
         assertTrue(battle.isGameOver());
     }
 
@@ -92,7 +92,7 @@ public class BattleModuleTest {
     void threeAttacksPlayerWin(){
         battle.playerAttack(1);
         battle.enemyAttack(1);
-        assertEquals(basicEnemy.getName()+" Dies!",battle.playerAttack(1));
+        assertEquals(basicEnemy.getName()+" takes 1 damage and Dies!",battle.playerAttack(1));
         assertTrue(battle.isBattleOver());
         assertEquals(9, basicPlayer.getStrength());
     }
@@ -102,7 +102,7 @@ public class BattleModuleTest {
         battle.playerAttack(1);
         battle.enemyAttack(1);
         battle.playerAttack(0);
-        assertEquals("You Died!",battle.enemyAttack(10));
+        assertEquals("You take 10 damage and Die!",battle.enemyAttack(10));
         assertTrue(battle.isGameOver());
     }
 
@@ -153,6 +153,15 @@ public class BattleModuleTest {
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());
     }
+
+    @Test
+    void fleeUntilKilled(){
+        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,"2 2 2 2 2");
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isGameOver());
+        assertFalse(failingPlayer.isAlive());
+    }
+
 
 
 }

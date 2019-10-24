@@ -10,17 +10,14 @@ public class BattleModule {
     private Scanner scan;
 
     public BattleModule(Player player,Enemy enemy){
-        this.player = player;
-        this.enemy = enemy;
-        setBattleInitiative(player.getSpeed()-enemy.getSpeed());
-        scan = new Scanner(System.in);
+        this(player,enemy,new Scanner(System.in));
     }
 
-    public BattleModule(Player player,Enemy enemy,String input){
+    public BattleModule(Player player,Enemy enemy,Scanner scan){
         this.player = player;
         this.enemy = enemy;
         setBattleInitiative(player.getSpeed()-enemy.getSpeed());
-        scan = new Scanner(input);
+        this.scan = scan;
     }
 
 

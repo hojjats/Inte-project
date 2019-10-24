@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -15,7 +17,7 @@ public class BattleModuleTest {
 
     private Enemy loadedEnemy = new Enemy(ALWAYS6_DIE);
     private Enemy failingEnemy = new Enemy(ALWAYS1_DIE);
-
+    private Scanner scan;
 
 
     @Test
@@ -129,7 +131,8 @@ public class BattleModuleTest {
 
     @Test
     void attackThenFleeStream(){
-        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,"1 2");
+        scan = new Scanner("1 2");
+        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,scan);
         loadedPlayer.setStrength(1);
         streamBattle.startBattle();
         assertEquals(1,failingEnemy.getStrength());
@@ -138,7 +141,8 @@ public class BattleModuleTest {
 
     @Test
     void attackStreamUntilEnemyDead(){
-        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,"1 1");
+        scan = new Scanner("1 1");
+        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,scan);
         loadedPlayer.setStrength(1);
         streamBattle.startBattle();
         assertTrue(streamBattle.isBattleOver());
@@ -147,7 +151,8 @@ public class BattleModuleTest {
 
     @Test
     void playerStartAndGetsKilled(){
-        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,"1 2");
+        scan = new Scanner("1 2");
+        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,scan);
         failingPlayer.setStrength(4);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
@@ -156,7 +161,8 @@ public class BattleModuleTest {
 
     @Test
     void fleeUntilKilled(){
-        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,"2 2 2 2 2");
+        scan = new Scanner("2 2 2 2 2");
+        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,scan);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());

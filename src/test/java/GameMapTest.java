@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 
 class GameMapTest {
@@ -100,16 +100,6 @@ class GameMapTest {
         MapTile startTile = new MapTile(new Effect(), "startTile");
         assertEquals(Directions.EAST, gameMap.getDirection(startTile, new Position(1, 0)));
     }
-
-    @Test
-    void moveToSameTile() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            GameMap gameMap = new GameMap();
-            MapTile startTile = new MapTile(new Effect(), "startTile");
-            gameMap.move(startTile, new Position(0, 0));
-        });
-    }
-
 
     @Test
     void moveToExistingTileDiscoveredTiles() {

@@ -17,8 +17,6 @@ public class GameMap {
     }
 
     public MapTile move(MapTile currentTile, Position newPos) {
-        if (currentTile.getPosition().equals(newPos))
-            throw new IllegalArgumentException();
         if (tiles.get(newPos) != null)
             return tiles.get(newPos);
         MapTile newTile = new MapTile(new Effect(), "tile:" + tiles.size(), currentTile, getDirection(currentTile, newPos), getDiscoveredTiles());
@@ -31,15 +29,15 @@ public class GameMap {
     }
 
     public Directions getDirection(MapTile currentTile, Position newPosition) {
-        if (currentTile.getPosition().x == newPosition.getX() && currentTile.getPosition().getY() + 1 == newPosition.getY())
-            return Directions.NORTH;
-        if (currentTile.getPosition().x == newPosition.getX() && currentTile.getPosition().getY() - 1 == newPosition.getY())
-            return Directions.SOUTH;
-        if (currentTile.getPosition().x - 1 == newPosition.getX() && currentTile.getPosition().getY() == newPosition.getY())
-            return Directions.WEST;
-        if (currentTile.getPosition().x + 1 == newPosition.getX() && currentTile.getPosition().getY() == newPosition.getY())
-            return Directions.EAST;
-        return null;
+        int diffX =  currentTile.getPosition().getX() - newPosition.getX();
+        int diffY = currentTile.getPosition().getY() - newPosition.getY();
+        Directions direction;
+        if(diffX == 0) {
+            direction = diffY > 0 ? Directions.SOUTH : Directions.NORTH;
+        } else {
+            direction = diffX > 0 ? Directions.WEST : Directions.EAST;
+        }
+        return direction;
     }
 
 

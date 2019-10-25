@@ -31,7 +31,6 @@ public class BattleModuleTest {
         fastEnemy.setSpeed(11);
         BattleModule battle = new BattleModule(basicPlayer,fastEnemy);
         assertFalse(battle.isPlayerTurn());
-
     }
 
     @Test
@@ -163,6 +162,17 @@ public class BattleModuleTest {
     void fleeUntilKilled(){
         scan = new Scanner("2 2 2 2 2");
         BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,scan);
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isGameOver());
+        assertFalse(failingPlayer.isAlive());
+    }
+
+    @Test
+    void fastEnemyKillsPlayerFirstAttack(){
+        scan = new Scanner("1");
+        loadedEnemy.setSpeed(11);
+        failingPlayer.setStrength(1);
+        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());

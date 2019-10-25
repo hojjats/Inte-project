@@ -55,10 +55,4 @@ public class EnemyTest{
         assertFalse(basicEnemy.isAlive());
     }
 
-    @Test
-    void dealDamageOnKilled(){
-        basicEnemy.takeDamage(5);
-        assertEquals(basicEnemy.getName()+" is already dead",basicEnemy.takeDamage(1));
-    }
-
 }

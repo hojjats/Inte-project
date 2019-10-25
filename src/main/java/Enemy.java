@@ -36,9 +36,6 @@ public class Enemy extends Creature {
     }
 
     public String takeDamage(int damageAmount){
-        if(!isAlive()){
-            return name+" is already dead";
-        }
         if(getStrength()<= damageAmount){
             die();
             return name +" takes "+damageAmount+" damage and Dies!";

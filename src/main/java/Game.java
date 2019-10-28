@@ -2,11 +2,13 @@ public class Game {
 
     private GameMap gameMap;
     private Player player;
-/*
-    public Game(int dimensions){
-        gameMap = new GameMap(dimensions);
+    private MapTile currentMapTile;
+
+    public Game(){
+        gameMap = new GameMap();
+        currentMapTile = gameMap.getStartTile();
         player = new Player();
-    }*/
+    }
 
    /** public void movePlayer(Directions direction){
         Position tempPos = null;

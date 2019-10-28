@@ -69,21 +69,22 @@ public class MapTile {
     }
 
     public Position getNewPosition(MapTile prev, Directions dir) {
+        Position pos = new Position(prev.getPosition().getX(),prev.getPosition().getY());
         switch (dir) {
             case EAST:
-                return new Position(prev.getPosition().getX() + 1, prev.getPosition().getY());
-
+                pos.setX(pos.getX()+1);
+                break;
             case NORTH:
-                return new Position(prev.getPosition().getX(), prev.getPosition().getY() + 1);
-
+                pos.setY(pos.getY()+1);
+                break;
             case WEST:
-                return new Position(prev.getPosition().getX() - 1, prev.getPosition().getY());
-
+                pos.setX(pos.getX()-1);
+                break;
             case SOUTH:
-                return new Position(prev.getPosition().getX(), prev.getPosition().getY() - 1);
-
+                pos.setY(pos.getY()-1);
+                break;
         }
-        return null;
+        return pos;
     }
 
     public void setEnemyOnTile() {
@@ -157,6 +158,18 @@ public class MapTile {
         this.southTile = southTile;
     }
 
+    public void setEastTile(MapTile eastTile) {
+        if (eastTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
+        this.eastTile = eastTile;
+    }
+
+    public void setWestTile(MapTile westTile) {
+        if (westTile == null)
+            throw new IllegalArgumentException("Tile can't be set to null");
+        this.westTile = westTile;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -168,17 +181,5 @@ public class MapTile {
     @Override
     public int hashCode() {
         return Objects.hash(position);
-    }
-
-    public void setEastTile(MapTile eastTile) {
-        if (eastTile == null)
-            throw new IllegalArgumentException("Tile can't be set to null");
-        this.eastTile = eastTile;
-    }
-
-    public void setWestTile(MapTile westTile) {
-        if (westTile == null)
-            throw new IllegalArgumentException("Tile can't be set to null");
-        this.westTile = westTile;
     }
 }

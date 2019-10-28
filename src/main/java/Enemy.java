@@ -11,6 +11,14 @@ public class Enemy extends Creature {
     public Enemy(String name,int strength,int speed, boolean isAggressive, Dice dice) {
         super(speed,strength);
         this.isAggressive = isAggressive;
+        if (name == null)
+            throw new IllegalArgumentException("Enemy must have a name");
+        if (name.length() == 0)
+            throw new IllegalArgumentException("Enemy must have a name");
+        if (name.trim().length() == 0)
+            throw new IllegalArgumentException("Enemy must have a name");
+        if (name.length() > 20)
+            throw new IllegalArgumentException("Enemy name is too long");
         this.name = name;
         this.dice = dice;
     }

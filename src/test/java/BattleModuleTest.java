@@ -172,11 +172,57 @@ public class BattleModuleTest {
         scan = new Scanner("1");
         loadedEnemy.setSpeed(11);
         failingPlayer.setStrength(1);
-        BattleModule streamBattle = new BattleModule(failingPlayer, loadedEnemy);
+        BattleModule streamBattle = new BattleModule(failingPlayer, loadedEnemy,scan);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());
     }
+
+
+    @Test
+    void stateMachineTestOne() {
+        scan = new Scanner("1 2");
+        Enemy strongLoadedEnemy = new Enemy("Troll", 5, 2, false, ALWAYS6_DIE);
+        BattleModule streamBattle = new BattleModule(failingPlayer, strongLoadedEnemy,scan);
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isGameOver());
+        assertFalse(failingPlayer.isAlive());
+    }
+
+    @Test
+    void stateMachineTestTwo() {
+        scan = new Scanner("1");
+        failingEnemy.setSpeed(loadedPlayer.getSpeed()+1);
+        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,scan);
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isBattleOver());
+        assertFalse(failingEnemy.isAlive());
+    }
+
+    @Test
+    void stateMachineTestThree(){
+        scan= new Scanner("2");
+        failingEnemy.setSpeed(loadedPlayer.getSpeed());
+        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,scan);
+        streamBattle.startBattle();
+        assertTrue(streamBattle.isBattleOver());
+        assertTrue(failingEnemy.isAlive());
+        assertTrue(loadedPlayer.isAlive());
+    }
+
+    @Test
+    void stateMachineTestFour(){
+        Enemy strongAndFastLoadedEnemy = new Enemy("Troll", 10, 10, false, ALWAYS6_DIE);
+        BattleModule battle = new BattleModule(failingPlayer,strongAndFastLoadedEnemy);
+        battle.startBattle();
+        assertTrue(battle.isGameOver());
+        assertFalse(failingPlayer.isAlive());
+    }
+
+
+
+
+
 
 
 }

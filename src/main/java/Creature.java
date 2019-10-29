@@ -7,10 +7,10 @@ public abstract class Creature {
     private boolean isAlive;
 
     public Creature(int speed, int maxStrength) {
-        if (maxStrength <= 0 || speed < 0)
-            throw new IllegalArgumentException();
-        if (maxStrength > 20 || speed > 20)
+        if (maxStrength < 1 || maxStrength > 20)
             throw new IllegalArgumentException("Strength must be between 1 and 20");
+        if (speed < 1 || speed > 20)
+            throw new IllegalArgumentException("Speed must be between 1 and 20");
         this.speed = speed;
         this.strength = maxStrength;
         this.maxStrength = maxStrength;

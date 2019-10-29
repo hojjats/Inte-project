@@ -1,7 +1,7 @@
 public class Enemy extends Creature {
 
     private boolean isAggressive;
-    private String name;
+    private final String name;
     private Dice dice;
 
     public Enemy(String name, int strength, int speed, boolean isAggressive) {
@@ -27,6 +27,7 @@ public class Enemy extends Creature {
         this("Grunt", 2, 5, false);
     }
 
+    @Override
     public int attack() {
         return dice.roll(getStrength(), 6);
     }
@@ -39,13 +40,16 @@ public class Enemy extends Creature {
         return isAggressive;
     }
 
+    @Override
     public String takeDamage(int damageAmount) {
+        if (damageAmount < 0)
+            throw new IllegalArgumentException("Damage can't be negative");
         if (getStrength() <= damageAmount) {
             die();
-            return String.format("%s takes %d damage and Dies!",name,damageAmount);
+            return String.format("%s takes %d damage and Dies!", name, damageAmount);
         }
         setStrength(getStrength() - damageAmount);
-        return String.format("%s takes %d damage",name,damageAmount);
+        return String.format("%s takes %d damage", name, damageAmount);
     }
 
     public Dice getDice() {

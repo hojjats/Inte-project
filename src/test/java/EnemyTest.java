@@ -72,6 +72,13 @@ public class EnemyTest {
     }
 
     @Test
+    void takeDamageNegative() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            basicEnemy.takeDamage(-1);
+        });
+    }
+
+    @Test
     void createEnemy() {
         Enemy enemy = new Enemy("Troll", 10, 10, true);
 

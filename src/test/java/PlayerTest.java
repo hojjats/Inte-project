@@ -124,4 +124,11 @@ public class PlayerTest {
         assertEquals(str, "You take " + (10 - playerStrength) + " damage!");
     }
 
+    @Test
+    void takeDamageNegative() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            loadedPlayer.takeDamage(-1);
+        });
+    }
+
 }

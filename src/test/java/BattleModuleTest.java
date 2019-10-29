@@ -19,6 +19,35 @@ public class BattleModuleTest {
     private Enemy failingEnemy = new Enemy(ALWAYS1_DIE);
     private Scanner scan;
 
+    @Test
+    void createBattleModuleNullEnemy() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BattleModule(basicPlayer, null, scan);
+        });
+    }
+
+    @Test
+    void createBattleModuleNullPlayer() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BattleModule(null, basicEnemy, scan);
+        });
+    }
+
+    @Test
+    void createBattleModuleNullScanner() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BattleModule(basicPlayer, basicEnemy, null);
+        });
+    }
+
+    @Test
+    void invalidCommandBattle() {
+        scan = new Scanner("3 1");
+        BattleModule battle = new BattleModule(loadedPlayer, loadedEnemy, scan);
+        battle.startBattle();
+        assertEquals(10, loadedPlayer.getStrength());
+        assertFalse(loadedEnemy.isAlive());
+    }
 
     @Test
     void startBattlePlayerInitiative() {

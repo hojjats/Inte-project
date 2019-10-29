@@ -42,7 +42,6 @@ public class MapTile {
         setItemOnTile();
     }
 
-
     public void setTile(MapTile prev, Directions dir) {
         switch (dir) {
             case NORTH:

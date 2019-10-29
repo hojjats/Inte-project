@@ -83,9 +83,23 @@ public class PlayerTest {
     }
 
     @Test
+    void setArmorNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.setArmor(null);
+        });
+    }
+
+    @Test
     void setWeapon() {
         p.setWeapon(woodAxe);
         assertEquals(p.getWeapon(), woodAxe);
+    }
+
+    @Test
+    void setWeaponNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.setWeapon(null);
+        });
     }
 
     @Test

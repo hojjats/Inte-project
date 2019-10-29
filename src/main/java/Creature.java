@@ -7,9 +7,10 @@ public abstract class Creature {
     private boolean isAlive;
 
     public Creature(int speed, int maxStrength) {
-        if(maxStrength <=0||speed<0){
+        if (maxStrength <= 0 || speed < 0)
             throw new IllegalArgumentException();
-        }
+        if (maxStrength > 20 || speed > 20)
+            throw new IllegalArgumentException("Strength must be between 1 and 20");
         this.speed = speed;
         this.strength = maxStrength;
         this.maxStrength = maxStrength;
@@ -17,30 +18,32 @@ public abstract class Creature {
     }
 
 
-   /** public Position moveNorth(){
-        Position tempPos = getPosition();
-        tempPos.setY(tempPos.getY() - 1);
-
-        return tempPos;
-    }
-
-    public Position moveSouth(){
-        Position tempPos = getPosition();
-        tempPos.setY(tempPos.getY() + 1);
-        return tempPos;
-    }
-
-    public Position moveWest(){
-        Position tempPos = getPosition();
-        tempPos.setX(tempPos.getX() - 1);
-        return tempPos;
-    }
-
-    public Position moveEast() {
-        Position tempPos = getPosition();
-        tempPos.setX(tempPos.getX() + 1);
-        return tempPos;
-    }**/
+    /**
+     * public Position moveNorth(){
+     * Position tempPos = getPosition();
+     * tempPos.setY(tempPos.getY() - 1);
+     * <p>
+     * return tempPos;
+     * }
+     * <p>
+     * public Position moveSouth(){
+     * Position tempPos = getPosition();
+     * tempPos.setY(tempPos.getY() + 1);
+     * return tempPos;
+     * }
+     * <p>
+     * public Position moveWest(){
+     * Position tempPos = getPosition();
+     * tempPos.setX(tempPos.getX() - 1);
+     * return tempPos;
+     * }
+     * <p>
+     * public Position moveEast() {
+     * Position tempPos = getPosition();
+     * tempPos.setX(tempPos.getX() + 1);
+     * return tempPos;
+     * }
+     **/
 
 
     public int getSpeed() {
@@ -72,7 +75,7 @@ public abstract class Creature {
         return isAlive;
     }
 
-    public void die(){
+    public void die() {
         isAlive = false;
     }
 

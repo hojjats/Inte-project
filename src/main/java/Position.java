@@ -4,9 +4,9 @@ public class Position {
     private int x;
     private int y;
 
-    public Position(int x, int y){
-        this.x=x;
-        this.y=y;
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {
@@ -25,9 +25,9 @@ public class Position {
         this.y = y;
     }
 
-    public boolean equals(Object o){
-        if(o instanceof Position){
-            return (x==((Position) o).getX() && y== ((Position) o).getY());
+    public boolean equals(Object o) {
+        if (o instanceof Position) {
+            return (x == ((Position) o).getX() && y == ((Position) o).getY());
         }
         return false;
     }

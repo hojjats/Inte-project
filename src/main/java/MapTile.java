@@ -65,23 +65,23 @@ public class MapTile {
     }
 
     private void setPosition(MapTile prev, Directions dir) {
-        this.position = getNewPosition(prev,dir);
+        this.position = getNewPosition(prev, dir);
     }
 
     public Position getNewPosition(MapTile prev, Directions dir) {
-        Position pos = new Position(prev.getPosition().getX(),prev.getPosition().getY());
+        Position pos = new Position(prev.getPosition().getX(), prev.getPosition().getY());
         switch (dir) {
             case EAST:
-                pos.setX(pos.getX()+1);
+                pos.setX(pos.getX() + 1);
                 break;
             case NORTH:
-                pos.setY(pos.getY()+1);
+                pos.setY(pos.getY() + 1);
                 break;
             case WEST:
-                pos.setX(pos.getX()-1);
+                pos.setX(pos.getX() - 1);
                 break;
             case SOUTH:
-                pos.setY(pos.getY()-1);
+                pos.setY(pos.getY() - 1);
                 break;
         }
         return pos;

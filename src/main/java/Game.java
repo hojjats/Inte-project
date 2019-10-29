@@ -4,33 +4,33 @@ public class Game {
     private Player player;
     private MapTile currentMapTile;
 
-    public Game(){
+    public Game() {
         gameMap = new GameMap();
         currentMapTile = gameMap.getStartTile();
         player = new Player();
     }
 
-   /** public void movePlayer(Directions direction){
-        Position tempPos = null;
-        switch(direction){
-            case NORTH:
-                tempPos = player.moveNorth();
-                break;
-            case SOUTH:
-                tempPos = player.moveSouth();
-                break;
-            case WEST:
-                tempPos = player.moveWest();
-                break;
-            case EAST:
-                tempPos = player.moveEast();
-                break;
-        }
+    /** public void movePlayer(Directions direction){
+     Position tempPos = null;
+     switch(direction){
+     case NORTH:
+     tempPos = player.moveNorth();
+     break;
+     case SOUTH:
+     tempPos = player.moveSouth();
+     break;
+     case WEST:
+     tempPos = player.moveWest();
+     break;
+     case EAST:
+     tempPos = player.moveEast();
+     break;
+     }
 
-        if(validatePosition(tempPos)){
-            player.setPosition(tempPos);
-        }
-    }**/
+     if(validatePosition(tempPos)){
+     player.setPosition(tempPos);
+     }
+     }**/
 
 
 

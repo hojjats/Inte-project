@@ -12,7 +12,7 @@ public class Dice {
         this.rnd = rnd;
     }
 
-    public int roll(int rolls, int wanted){
+    public int roll(int rolls, int wanted) {
         int successfulRolls = 0;
         for (int i = 0; i < rolls; i++) {
             int rndInt = rnd.nextInt(6) + 1;
@@ -23,6 +23,8 @@ public class Dice {
         return successfulRolls;
     }
 
-    public int rollDice(){ return rnd.nextInt(6)+1 ;}
+    public int rollDice() {
+        return rnd.nextInt(6) + 1;
+    }
 
 }

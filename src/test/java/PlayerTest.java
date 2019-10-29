@@ -17,24 +17,24 @@ public class PlayerTest {
     }
 
     @Test
-    void getSpeed(){
-        assertEquals(p.getSpeed(),10);
+    void getSpeed() {
+        assertEquals(p.getSpeed(), 10);
     }
 
     @Test
-    void setSpeedToPositiveValue(){
+    void setSpeedToPositiveValue() {
         int newVal = 5;
         p.setSpeed(newVal);
-        assertEquals(p.getSpeed(),newVal);
+        assertEquals(p.getSpeed(), newVal);
     }
 
     @Test
-    void getStrength(){
+    void getStrength() {
         assertEquals(p.getStrength(), 10);
     }
 
     @Test
-    void setStrengthToNegativeValue(){
+    void setStrengthToNegativeValue() {
         int newVal = -10;
         assertThrows(IllegalArgumentException.class, () -> {
             p.setStrength(newVal);
@@ -42,7 +42,7 @@ public class PlayerTest {
     }
 
     @Test
-    void setStrengthToOverMaxStrength(){
+    void setStrengthToOverMaxStrength() {
         int newVal = 11;
         assertThrows(IllegalArgumentException.class, () -> {
             p.setStrength(newVal);
@@ -50,28 +50,28 @@ public class PlayerTest {
     }
 
     @Test
-    void setStrength(){
+    void setStrength() {
         p.setStrength(7);
         assertEquals(p.getStrength(), 7);
     }
 
     @Test
-    void moveNorth(){
+    void moveNorth() {
 
     }
 
     @Test
-    void moveSouth(){
+    void moveSouth() {
 
     }
 
     @Test
-    void moveWest(){
+    void moveWest() {
 
     }
 
     @Test
-    void moveEast(){
+    void moveEast() {
 
 
     }
@@ -79,7 +79,7 @@ public class PlayerTest {
     @Test
     void setArmor() {
         p.setArmor(leatherArmor);
-        assertEquals(p.getArmor(),  leatherArmor);
+        assertEquals(p.getArmor(), leatherArmor);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class PlayerTest {
     }
 
     @Test
-    void attackWithoutWeapon(){
+    void attackWithoutWeapon() {
         int attackStrength = loadedPlayer.attack();
         System.out.println("Result: " + attackStrength);
         assertEquals(10, attackStrength);
@@ -108,20 +108,20 @@ public class PlayerTest {
     }
 
     @Test
-    void takeDamageWithoutArmor(){
+    void takeDamageWithoutArmor() {
         String str = p.takeDamage(1);
         assertEquals(p.getStrength(), 9);
         assertEquals(str, "You take 1 damage!");
     }
 
     @Test
-    void takeDamageWithArmor(){
+    void takeDamageWithArmor() {
         // Armor rating 6
         loadedPlayer.setArmor(leatherArmor);
         String str = loadedPlayer.takeDamage(7);
         int playerStrength = loadedPlayer.getStrength();
         assertEquals(9, playerStrength);
-        assertEquals(str, "You take "+(10-playerStrength)+" damage!");
+        assertEquals(str, "You take " + (10 - playerStrength) + " damage!");
     }
 
 }

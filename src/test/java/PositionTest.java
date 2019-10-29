@@ -5,54 +5,54 @@ import org.junit.jupiter.api.Test;
 
 public class PositionTest {
 
-    Position p = new Position(1,1);
+    Position p = new Position(1, 1);
 
     @Test
-    void getX(){
+    void getX() {
         assertEquals(p.getX(), 1);
     }
 
     @Test
-    void getY(){
+    void getY() {
         assertEquals(p.getY(), 1);
     }
 
     @Test
-    void setXPositive(){
+    void setXPositive() {
         p.setX(2);
         assertEquals(p.getX(), 2);
     }
 
     @Test
-    void setYPositive(){
+    void setYPositive() {
         p.setY(2);
         assertEquals(p.getY(), 2);
     }
 
     @Test
-    void setXNegative(){
+    void setXNegative() {
         p.setX(-2);
         assertEquals(p.getX(), -2);
     }
 
     @Test
-    void setYNegative(){
+    void setYNegative() {
         p.setY(-2);
         assertEquals(p.getY(), -2);
     }
 
     @Test
-    void equals(){
-        Position pos1 = new Position(3,3);
-        Position pos2 = new Position(3,3);
-        assertEquals(pos1,pos2);
+    void equals() {
+        Position pos1 = new Position(3, 3);
+        Position pos2 = new Position(3, 3);
+        assertEquals(pos1, pos2);
     }
 
     @Test
-    void equalsNotPosition(){
-        Position pos1 = new Position(3,3);
+    void equalsNotPosition() {
+        Position pos1 = new Position(3, 3);
         Object obj = new Object();
-        assertNotEquals(pos1,obj);
+        assertNotEquals(pos1, obj);
     }
 
 }

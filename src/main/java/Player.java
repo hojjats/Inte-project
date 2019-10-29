@@ -4,7 +4,7 @@ public class Player extends Creature {
     private Armor armor;
     private Dice dice;
 
-    public Player(){
+    public Player() {
         this(new Dice());
     }
 
@@ -12,7 +12,6 @@ public class Player extends Creature {
         super(10, 10);
         this.dice = dice;
     }
-
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
@@ -30,12 +29,10 @@ public class Player extends Creature {
     }
 
     /**
-     *
      * @return int damage, the attack strength
-     *
+     * <p>
      * Rolls number between 1-6 for every strength point and weapon damage if present.
      * Every rolled 6 gives the damage a +1 in attack.
-     *
      */
     @Override
     public int attack() {
@@ -47,36 +44,34 @@ public class Player extends Creature {
     }
 
     /**
-     *
      * @param damageAmount
      * @return String "You take [damage] damage!"
-     *
+     * <p>
      * Rolls number between 1-6 for every armor point.
      * Every rolled 6 gives the player a damage reduction of 1.
-     *
      */
     @Override
     public String takeDamage(int damageAmount) {
         if (armor != null) {
             damageAmount -= dice.roll(armor.getArmorRating(), 6);
         }
-        if(getStrength()<=damageAmount){
+        if (getStrength() <= damageAmount) {
             die();
-            return "You take "+damageAmount+" damage and Die!";
+            return "You take " + damageAmount + " damage and Die!";
         }
         setStrength(getStrength() - damageAmount);
-        return "You take "+damageAmount+" damage!";
+        return "You take " + damageAmount + " damage!";
     }
 
-    public Dice getDice(){
+    public Dice getDice() {
         return dice;
     }
 
     @Override
     public String toString() {
         return "Player{" +
-            "speed=" + getSpeed() +
-            ", strength=" + getStrength() +
-            '}';
+                "speed=" + getSpeed() +
+                ", strength=" + getStrength() +
+                '}';
     }
 }

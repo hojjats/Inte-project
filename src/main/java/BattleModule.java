@@ -9,11 +9,11 @@ public class BattleModule {
     private boolean playerTurn;
     private Scanner scan;
 
-    public BattleModule(Player player,Enemy enemy){
-        this(player,enemy,new Scanner(System.in));
+    public BattleModule(Player player, Enemy enemy) {
+        this(player, enemy, new Scanner(System.in));
     }
 
-    public BattleModule(Player player,Enemy enemy,Scanner scan) {
+    public BattleModule(Player player, Enemy enemy, Scanner scan) {
         this.player = player;
         this.enemy = enemy;
         this.scan = scan;
@@ -23,29 +23,28 @@ public class BattleModule {
     /* Checks creatures speed to determine who starts attacking
     if creatures have the same speed, both enemy and player rolls and the one with the highest roll
     starts the battle*/
-    private void setBattleInitiative(int initiative){
-        if(initiative==0){
-           playerTurn = roll() > 0;
-        }
-        else {
+    private void setBattleInitiative(int initiative) {
+        if (initiative == 0) {
+            playerTurn = roll() > 0;
+        } else {
             playerTurn = initiative > 0;
         }
     }
 
-    private int roll(){
+    private int roll() {
         int winner;
         do {
-            winner = player.getDice().rollDice()-enemy.getDice().rollDice();
-        }while (winner == 0);
+            winner = player.getDice().rollDice() - enemy.getDice().rollDice();
+        } while (winner == 0);
         return winner;
     }
 
-    private void switchAttacker(){
+    private void switchAttacker() {
         playerTurn = !playerTurn;
     }
 
-    private void battleCommand(int command){
-        switch (command){
+    private void battleCommand(int command) {
+        switch (command) {
             case 1:
                 System.out.println(playerAttack(player.attack()));
                 break;
@@ -55,28 +54,28 @@ public class BattleModule {
         }
     }
 
-    public void startBattle(){
-        if(!playerTurn){
+    public void startBattle() {
+        if (!playerTurn) {
             System.out.println(enemyAttack(enemy.attack()));
         }
-        while(!battleIsOver && !gameIsOver){
+        while (!battleIsOver && !gameIsOver) {
             int command = scan.nextInt();
             battleCommand(command);
-            if(!battleIsOver){
+            if (!battleIsOver) {
                 System.out.println(enemyAttack(enemy.attack()));
             }
         }
     }
 
-    protected String flee(){
+    protected String flee() {
         String fleeMessage = "You attempt to flee";
-        if(playerTurn){
+        if (playerTurn) {
             battleIsOver = roll() > 0;
             switchAttacker();
-        }else {
+        } else {
             return "Enemy Turn!";
         }
-        fleeMessage = battleIsOver ? fleeMessage+" and succeed!":fleeMessage+" but fail!";
+        fleeMessage = battleIsOver ? fleeMessage + " and succeed!" : fleeMessage + " but fail!";
         return fleeMessage;
     }
 
@@ -84,30 +83,30 @@ public class BattleModule {
         return battleIsOver;
     }
 
-    public boolean isGameOver(){
+    public boolean isGameOver() {
         return gameIsOver;
     }
 
-    protected String playerAttack(int damage){
-        String attackMessage="Enemy Turn!";
-        if(playerTurn && enemy.isAlive()) {
+    protected String playerAttack(int damage) {
+        String attackMessage = "Enemy Turn!";
+        if (playerTurn && enemy.isAlive()) {
             attackMessage = enemy.takeDamage(damage);
-                if (!enemy.isAlive()) {
-                    battleIsOver = true;
-                }
-                switchAttacker();
+            if (!enemy.isAlive()) {
+                battleIsOver = true;
+            }
+            switchAttacker();
         }
         return attackMessage;
     }
 
-    protected String enemyAttack(int damage){
+    protected String enemyAttack(int damage) {
         String attackMessage = "Player Turn!";
-        if(!playerTurn && player.isAlive()) {
-             attackMessage = player.takeDamage(damage);
-                 if (!player.isAlive()) {
-                      gameIsOver = true;
-                 }
-                 switchAttacker();
+        if (!playerTurn && player.isAlive()) {
+            attackMessage = player.takeDamage(damage);
+            if (!player.isAlive()) {
+                gameIsOver = true;
+            }
+            switchAttacker();
         }
         return attackMessage;
     }

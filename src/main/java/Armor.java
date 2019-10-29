@@ -7,7 +7,7 @@ public class Armor extends Item {
         this.armorRating = armorRating;
     }
 
-    public int getArmorRating(){
+    public int getArmorRating() {
         return armorRating;
     }
 }

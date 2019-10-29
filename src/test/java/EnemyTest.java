@@ -39,7 +39,7 @@ public class EnemyTest {
     @Test
     void createEnemyNameTooLongEkv() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Enemy enemy = new Enemy("hehehehehehehehehehe", 10, 5, true);
+            Enemy enemy = new Enemy("hehehehehehehehehehehehehe", 10, 5, true);
         });
     }
 
@@ -70,7 +70,6 @@ public class EnemyTest {
             Enemy enemy = new Enemy("testEnemy", 10, 21, true);
         });
     }
-
 
     @Test
     void createEnemy() {

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BattleModuleTest {
     private Player basicPlayer = new Player();
     private Enemy basicEnemy = new Enemy();
-    private BattleModule battle = new BattleModule(basicPlayer,basicEnemy);
+    private BattleModule battle = new BattleModule(basicPlayer, basicEnemy);
     private final Dice ALWAYS6_DIE = new Dice(new mocks.Random(6));
     private final Dice ALWAYS1_DIE = new Dice(new mocks.Random(1));
 
@@ -21,31 +21,31 @@ public class BattleModuleTest {
 
 
     @Test
-    void startBattlePlayerInitiative(){
+    void startBattlePlayerInitiative() {
         assertTrue(battle.isPlayerTurn());
     }
 
     @Test
-    void startBattleEnemyInitiative(){
+    void startBattleEnemyInitiative() {
         Enemy fastEnemy = new Enemy();
         fastEnemy.setSpeed(11);
-        BattleModule battle = new BattleModule(basicPlayer,fastEnemy);
+        BattleModule battle = new BattleModule(basicPlayer, fastEnemy);
         assertFalse(battle.isPlayerTurn());
     }
 
     @Test
-    void startBattleSameSpeedPlayerWins(){
+    void startBattleSameSpeedPlayerWins() {
         Enemy fastFailingEnemy = new Enemy(ALWAYS1_DIE);
         fastFailingEnemy.setSpeed(10);
-        BattleModule playerInitiative = new BattleModule(loadedPlayer,fastFailingEnemy);
+        BattleModule playerInitiative = new BattleModule(loadedPlayer, fastFailingEnemy);
         assertTrue(playerInitiative.isPlayerTurn());
     }
 
     @Test
-    void startBattleSameSpeedEnemyWins(){
+    void startBattleSameSpeedEnemyWins() {
         Enemy fastLoadedEnemy = new Enemy(ALWAYS6_DIE);
         fastLoadedEnemy.setSpeed(10);
-        BattleModule enemyInitiative = new BattleModule(failingPlayer,fastLoadedEnemy);
+        BattleModule enemyInitiative = new BattleModule(failingPlayer, fastLoadedEnemy);
         assertFalse(enemyInitiative.isPlayerTurn());
     }
 
@@ -57,91 +57,91 @@ public class BattleModuleTest {
     }
 
     @Test
-    void damageDealing(){
+    void damageDealing() {
         Enemy basicEnemy = new Enemy();
         BattleModule battle = new BattleModule(basicPlayer, basicEnemy);
-        assertEquals(basicEnemy.getName()+" takes 1 damage", battle.playerAttack(1));
-        assertEquals("You take 1 damage!",battle.enemyAttack(1));
+        assertEquals(basicEnemy.getName() + " takes 1 damage", battle.playerAttack(1));
+        assertEquals("You take 1 damage!", battle.enemyAttack(1));
     }
 
     @Test
-    void playerAttacksOnEnemyTurn(){
-    battle.playerAttack(1);
-    assertEquals("Enemy Turn!",battle.playerAttack(1));
+    void playerAttacksOnEnemyTurn() {
+        battle.playerAttack(1);
+        assertEquals("Enemy Turn!", battle.playerAttack(1));
     }
 
     @Test
-    void enemyAttacksOnPlayerTurn(){
+    void enemyAttacksOnPlayerTurn() {
         assertEquals("Player Turn!", battle.enemyAttack(1));
     }
 
     @Test
-    void enemyDies(){
-        assertEquals(basicEnemy.getName()+" takes 2 damage and Dies!",battle.playerAttack(2));
+    void enemyDies() {
+        assertEquals(basicEnemy.getName() + " takes 2 damage and Dies!", battle.playerAttack(2));
         assertTrue(battle.isBattleOver());
         assertFalse(battle.isGameOver());
     }
 
     @Test
-    void playerDies(){
+    void playerDies() {
         battle.playerAttack(1);
         assertEquals("You take 10 damage and Die!", battle.enemyAttack(10));
         assertTrue(battle.isGameOver());
     }
 
     @Test
-    void threeAttacksPlayerWin(){
+    void threeAttacksPlayerWin() {
         battle.playerAttack(1);
         battle.enemyAttack(1);
-        assertEquals(basicEnemy.getName()+" takes 1 damage and Dies!",battle.playerAttack(1));
+        assertEquals(basicEnemy.getName() + " takes 1 damage and Dies!", battle.playerAttack(1));
         assertTrue(battle.isBattleOver());
         assertEquals(9, basicPlayer.getStrength());
     }
 
     @Test
-    void fourAttacksEnemyWin(){
+    void fourAttacksEnemyWin() {
         battle.playerAttack(1);
         battle.enemyAttack(1);
         battle.playerAttack(0);
-        assertEquals("You take 10 damage and Die!",battle.enemyAttack(10));
+        assertEquals("You take 10 damage and Die!", battle.enemyAttack(10));
         assertTrue(battle.isGameOver());
     }
 
     @Test
-    void fleeSuccess(){
-        BattleModule fleeSuccess = new BattleModule(loadedPlayer,failingEnemy);
+    void fleeSuccess() {
+        BattleModule fleeSuccess = new BattleModule(loadedPlayer, failingEnemy);
         fleeSuccess.flee();
         assertTrue(fleeSuccess.isBattleOver());
     }
 
     @Test
-    void fleeFailure(){
-        BattleModule fleeFailure = new BattleModule(failingPlayer,loadedEnemy);
+    void fleeFailure() {
+        BattleModule fleeFailure = new BattleModule(failingPlayer, loadedEnemy);
         fleeFailure.flee();
         assertFalse(fleeFailure.isBattleOver());
     }
 
     @Test
-    void fleeOnEnemyTurn(){
+    void fleeOnEnemyTurn() {
         battle.playerAttack(1);
-        assertEquals("Enemy Turn!",battle.flee());
+        assertEquals("Enemy Turn!", battle.flee());
         assertFalse(battle.isPlayerTurn());
     }
 
     @Test
-    void attackThenFleeStream(){
+    void attackThenFleeStream() {
         scan = new Scanner("1 2");
-        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,scan);
+        BattleModule streamBattle = new BattleModule(loadedPlayer, failingEnemy, scan);
         loadedPlayer.setStrength(1);
         streamBattle.startBattle();
-        assertEquals(1,failingEnemy.getStrength());
+        assertEquals(1, failingEnemy.getStrength());
         assertTrue(streamBattle.isBattleOver());
     }
 
     @Test
-    void attackStreamUntilEnemyDead(){
+    void attackStreamUntilEnemyDead() {
         scan = new Scanner("1 1");
-        BattleModule streamBattle = new BattleModule(loadedPlayer,failingEnemy,scan);
+        BattleModule streamBattle = new BattleModule(loadedPlayer, failingEnemy, scan);
         loadedPlayer.setStrength(1);
         streamBattle.startBattle();
         assertTrue(streamBattle.isBattleOver());
@@ -149,9 +149,9 @@ public class BattleModuleTest {
     }
 
     @Test
-    void playerStartAndGetsKilled(){
+    void playerStartAndGetsKilled() {
         scan = new Scanner("1 2");
-        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,scan);
+        BattleModule streamBattle = new BattleModule(failingPlayer, loadedEnemy, scan);
         failingPlayer.setStrength(4);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
@@ -159,20 +159,20 @@ public class BattleModuleTest {
     }
 
     @Test
-    void fleeUntilKilled(){
+    void fleeUntilKilled() {
         scan = new Scanner("2 2 2 2 2");
-        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy,scan);
+        BattleModule streamBattle = new BattleModule(failingPlayer, loadedEnemy, scan);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());
     }
 
     @Test
-    void fastEnemyKillsPlayerFirstAttack(){
+    void fastEnemyKillsPlayerFirstAttack() {
         scan = new Scanner("1");
         loadedEnemy.setSpeed(11);
         failingPlayer.setStrength(1);
-        BattleModule streamBattle = new BattleModule(failingPlayer,loadedEnemy);
+        BattleModule streamBattle = new BattleModule(failingPlayer, loadedEnemy);
         streamBattle.startBattle();
         assertTrue(streamBattle.isGameOver());
         assertFalse(failingPlayer.isAlive());

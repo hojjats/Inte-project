@@ -44,7 +44,7 @@ class GameMapTest {
     }
 
     @Test
-    void moveBackAndForth(){
+    void moveBackAndForth() {
         MapTile newTile = gameMap.move(startTile, new Position(0, 1));
         assertEquals(startTile.getDiscoveredTiles(), gameMap.move(newTile, new Position(0, 0)).getDiscoveredTiles());
     }
@@ -61,8 +61,8 @@ class GameMapTest {
     @Test
     void moveToNonExistingTile() {
         int beforeMove = gameMap.getDiscoveredTiles();
-        assertEquals(gameMap.move(gameMap.getStartTile(), new Position(0, 1)), new MapTile(new Effect(), "tile:" + 1, gameMap.getStartTile(), gameMap.getDirection(gameMap.getStartTile(),new Position(0,1)), gameMap.getDiscoveredTiles()));
-        assertEquals(beforeMove+1, gameMap.getDiscoveredTiles());
+        assertEquals(gameMap.move(gameMap.getStartTile(), new Position(0, 1)), new MapTile(new Effect(), "tile:" + 1, gameMap.getStartTile(), gameMap.getDirection(gameMap.getStartTile(), new Position(0, 1)), gameMap.getDiscoveredTiles()));
+        assertEquals(beforeMove + 1, gameMap.getDiscoveredTiles());
     }
 
     /*GameMap basicMap = new GameMap(6);

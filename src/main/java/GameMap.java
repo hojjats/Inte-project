@@ -12,8 +12,9 @@ public class GameMap {
     public MapTile getTile(Position pos) {
         return tiles.get(pos);
     }
-    public MapTile getStartTile(){
-        return tiles.get(new Position(0,0));
+
+    public MapTile getStartTile() {
+        return tiles.get(new Position(0, 0));
     }
 
     public MapTile move(MapTile currentTile, Position newPos) {
@@ -29,10 +30,10 @@ public class GameMap {
     }
 
     public Directions getDirection(MapTile currentTile, Position newPosition) {
-        int diffX =  currentTile.getPosition().getX() - newPosition.getX();
+        int diffX = currentTile.getPosition().getX() - newPosition.getX();
         int diffY = currentTile.getPosition().getY() - newPosition.getY();
         Directions direction;
-        if(diffX == 0) {
+        if (diffX == 0) {
             direction = diffY > 0 ? Directions.SOUTH : Directions.NORTH;
         } else {
             direction = diffX > 0 ? Directions.WEST : Directions.EAST;

@@ -42,10 +42,10 @@ public class Enemy extends Creature {
     public String takeDamage(int damageAmount) {
         if (getStrength() <= damageAmount) {
             die();
-            return name + " takes " + damageAmount + " damage and Dies!";
+            return String.format("%s takes %d damage and Dies!",name,damageAmount);
         }
         setStrength(getStrength() - damageAmount);
-        return name + " takes " + damageAmount + " damage";
+        return String.format("%s takes %d damage",name,damageAmount);
     }
 
     public Dice getDice() {

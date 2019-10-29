@@ -57,10 +57,10 @@ public class Player extends Creature {
         }
         if (getStrength() <= damageAmount) {
             die();
-            return "You take " + damageAmount + " damage and Die!";
+            return String.format("You take %d damage and Die!",damageAmount);
         }
         setStrength(getStrength() - damageAmount);
-        return "You take " + damageAmount + " damage!";
+        return String.format("You take %d damage!",damageAmount);
     }
 
     public Dice getDice() {
@@ -69,9 +69,6 @@ public class Player extends Creature {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "speed=" + getSpeed() +
-                ", strength=" + getStrength() +
-                '}';
+        return String.format("Player{speed=%d,strength=%d}",getSpeed(),getStrength());
     }
 }

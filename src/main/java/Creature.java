@@ -67,7 +67,7 @@ public abstract class Creature {
 
     public void setStrength(int strength) {
         if (strength < 0 || strength > maxStrength)
-            throw new IllegalArgumentException("Health can't be less than zero (0)");
+            throw new IllegalArgumentException(String.format("Health must be between 0 and %d",maxStrength));
         this.strength = strength;
     }
 

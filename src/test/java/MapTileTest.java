@@ -158,7 +158,7 @@ public class MapTileTest {
     void setEnemyTier1() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST, 1);
         mapTile.setDiscoveredTiles(3);
-        mapTile.setEnemyOnTile();
+        mapTile.putEnemyOnTile();
         assertEquals(mapTile.getEnemyOnTile().getStrength(), 1);
     }
 
@@ -166,7 +166,7 @@ public class MapTileTest {
     void setEnemeyTier2() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST, 1);
         mapTile.setDiscoveredTiles(5);
-        mapTile.setEnemyOnTile();
+        mapTile.putEnemyOnTile();
         assertEquals(mapTile.getEnemyOnTile().getStrength(), 2);
     }
 
@@ -174,7 +174,7 @@ public class MapTileTest {
     void setEnemyTier3() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST, 1);
         mapTile.setDiscoveredTiles(10);
-        mapTile.setEnemyOnTile();
+        mapTile.putEnemyOnTile();
         assertEquals(mapTile.getEnemyOnTile().getStrength(), 3);
     }
 
@@ -182,7 +182,7 @@ public class MapTileTest {
     void setItemOnTileEvenTile() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST, 1);
         mapTile.setDiscoveredTiles(3);
-        mapTile.setItemOnTile();
+        mapTile.putItemOnTile();
         assertTrue(mapTile.getItemOnTile() instanceof Weapon);
     }
 
@@ -190,7 +190,7 @@ public class MapTileTest {
     void setItemOnTileUnevenTile() {
         MapTile mapTile = new MapTile(new Effect(), "HeroStorm", startTile, Directions.WEST, 1);
         mapTile.setDiscoveredTiles(6);
-        mapTile.setItemOnTile();
+        mapTile.putItemOnTile();
         assertTrue(mapTile.getItemOnTile() instanceof Armor);
     }
 

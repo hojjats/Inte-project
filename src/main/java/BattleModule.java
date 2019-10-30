@@ -4,9 +4,7 @@ public class BattleModule {
 
     private Player player;
     private Enemy enemy;
-    private boolean battleIsOver = false;
-    private boolean gameIsOver = false;
-    private boolean playerTurn;
+    private boolean playerTurn, battleIsOver = false, gameIsOver = false;
     private Scanner scan;
 
     public BattleModule(Player player, Enemy enemy) {
@@ -14,6 +12,8 @@ public class BattleModule {
     }
 
     public BattleModule(Player player, Enemy enemy, Scanner scan) {
+        if (player == null || enemy == null || scan == null)
+            throw new IllegalArgumentException("Player, Enemy and Scanner must be defined");
         this.player = player;
         this.enemy = enemy;
         this.scan = scan;
@@ -43,27 +43,33 @@ public class BattleModule {
         playerTurn = !playerTurn;
     }
 
-    private void battleCommand(int command) {
+    private boolean executeBattleCommand(int command) {
         switch (command) {
             case 1:
                 System.out.println(playerAttack(player.attack()));
-                break;
+                return true;
             case 2:
                 System.out.println(flee());
-                break;
+                return true;
+            default:
+                System.out.println("Invalid command");
+                return false;
         }
     }
+
 
     public void startBattle() {
         if (!playerTurn) {
             System.out.println(enemyAttack(enemy.attack()));
         }
-        while (!battleIsOver && !gameIsOver) {
-            int command = scan.nextInt();
-            battleCommand(command);
-            if (!battleIsOver) {
-                System.out.println(enemyAttack(enemy.attack()));
-            }
+        if (!battleIsOver && !gameIsOver) {
+            do {
+                int command = scan.nextInt();
+                boolean validCommand = executeBattleCommand(command);
+                if (validCommand && !battleIsOver) {
+                    System.out.println(enemyAttack(enemy.attack()));
+                }
+            } while (!battleIsOver && !gameIsOver);
         }
     }
 
@@ -98,6 +104,7 @@ public class BattleModule {
         }
         return attackMessage;
     }
+
 
     protected String enemyAttack(int damage) {
         String attackMessage = "Player Turn!";

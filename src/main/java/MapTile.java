@@ -7,13 +7,9 @@ public class MapTile {
     private Item itemOnTile;
     private int discoveredTiles;
     private Position position;
-    private String name;
-    private MapTile northTile;
-    private MapTile southTile;
-    private MapTile eastTile;
-    private MapTile westTile;
-
-    //TODO: NYA CLASSER: ITEMLIST OCH ENEMYLIST MED GETTERS SOM RETURNERAR BASERAT PÅ TIER. CONTAINERS FÖR ENEMIES OCH ITEMS
+    private final String name;
+    private MapTile northTile, southTile, eastTile, westTile;
+    private final int DIFFICULTY_MODIFIER = 5, ITEM_OCCURRENCE = 3, ITEM_TYPE_ALTERNATION = 2;
 
     // Effect can be null, no effect on tile
     public MapTile(Effect effect, String name, MapTile previousTile, Directions direction, int discoveredTiles) {
@@ -25,8 +21,10 @@ public class MapTile {
         if (discoveredTiles <= 0)
             throw new IllegalArgumentException("Discovered tiles can't be zero or less");
         this.discoveredTiles = discoveredTiles;
-        setPosition(previousTile, direction);
+        setPositionFromDirection(previousTile, direction);
         setTile(previousTile, direction);
+        putEnemyOnTile();
+        putItemOnTile();
     }
 
     public MapTile(Effect effect, String name) {
@@ -38,64 +36,62 @@ public class MapTile {
         this.position = new Position(0, 0);
         this.name = name;
         this.discoveredTiles = 1;
-        setEnemyOnTile();
-        setItemOnTile();
+
     }
 
-    public void setTile(MapTile prev, Directions dir) {
-        switch (dir) {
+
+    private void setTile(MapTile previousTile, Directions direction) {
+        switch (direction) {
             case NORTH:
-                this.setSouthTile(prev);
-                prev.setNorthTile(this);
+                this.setSouthTile(previousTile);
+                previousTile.setNorthTile(this);
                 break;
             case SOUTH:
-                this.setNorthTile(prev);
-                prev.setSouthTile(this);
+                this.setNorthTile(previousTile);
+                previousTile.setSouthTile(this);
                 break;
             case EAST:
-                this.setWestTile(prev);
-                prev.setEastTile(this);
+                this.setWestTile(previousTile);
+                previousTile.setEastTile(this);
                 break;
             case WEST:
-                this.setEastTile(prev);
-                prev.setWestTile(this);
+                this.setEastTile(previousTile);
+                previousTile.setWestTile(this);
                 break;
         }
     }
 
-    private void setPosition(MapTile prev, Directions dir) {
-        this.position = getNewPosition(prev, dir);
-    }
 
-    public Position getNewPosition(MapTile prev, Directions dir) {
-        Position pos = new Position(prev.getPosition().getX(), prev.getPosition().getY());
-        switch (dir) {
+    private void setPositionFromDirection(MapTile previousTile, Directions direction) {
+        Position position = new Position(previousTile.getPosition().getX(), previousTile.getPosition().getY());
+        switch (direction) {
             case EAST:
-                pos.setX(pos.getX() + 1);
+                position.setX(position.getX() + 1);
                 break;
             case NORTH:
-                pos.setY(pos.getY() + 1);
+                position.setY(position.getY() + 1);
                 break;
             case WEST:
-                pos.setX(pos.getX() - 1);
+                position.setX(position.getX() - 1);
                 break;
             case SOUTH:
-                pos.setY(pos.getY() - 1);
+                position.setY(position.getY() - 1);
                 break;
         }
-        return pos;
+        this.position = position;
     }
 
-    public void setEnemyOnTile() {
-        int strength = (discoveredTiles / 5) + 1;
+    public void putEnemyOnTile() {
+        int strength = (discoveredTiles / DIFFICULTY_MODIFIER) + 1;
+        strength = strength > 20 ? 20 : strength;
         int speed = 1;
         enemyOnTile = new Enemy("Slime", strength, speed, true);
     }
 
-    public void setItemOnTile() {
-        int itemTier = (discoveredTiles / 5) + 1;
-        if (discoveredTiles % 3 == 0) {
-            itemOnTile = discoveredTiles % 2 == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
+    public void putItemOnTile() {
+        int itemTier = (discoveredTiles / DIFFICULTY_MODIFIER) + 1;
+        if (discoveredTiles % ITEM_OCCURRENCE == 0) {
+            itemOnTile = discoveredTiles % ITEM_TYPE_ALTERNATION == 0 ? new Armor("Shield", itemTier) : new Weapon("Sword", itemTier);
         }
     }
 

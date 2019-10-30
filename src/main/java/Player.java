@@ -14,6 +14,8 @@ public class Player extends Creature {
     }
 
     public void setArmor(Armor armor) {
+        if (armor == null)
+            throw new IllegalArgumentException("Armor can't be null");
         this.armor = armor;
     }
 
@@ -22,6 +24,8 @@ public class Player extends Creature {
     }
 
     public void setWeapon(Weapon weapon) {
+        if (weapon == null)
+            throw new IllegalArgumentException("Weapon can't be null");
         this.weapon = weapon;
     }
 
@@ -53,6 +57,8 @@ public class Player extends Creature {
      */
     @Override
     public String takeDamage(int damageAmount) {
+        if (damageAmount < 0)
+            throw new IllegalArgumentException("Damage can't be negative");
         if (armor != null) {
             damageAmount -= dice.roll(armor.getArmorRating(), 6);
         }
@@ -70,6 +76,6 @@ public class Player extends Creature {
 
     @Override
     public String toString() {
-        return String.format("Player{speed=%d,strength=%d}", getSpeed(), getStrength());
+        return String.format("Player{speed=%d, strength=%d}", getSpeed(), getStrength());
     }
 }

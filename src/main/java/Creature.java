@@ -2,6 +2,7 @@
 public abstract class Creature {
 
     private int speed;
+    // Strength is also health
     private int maxStrength;
     private int strength;
     private boolean isAlive;
@@ -67,7 +68,7 @@ public abstract class Creature {
 
     public void setStrength(int strength) {
         if (strength < 0 || strength > maxStrength)
-            throw new IllegalArgumentException(String.format("Health must be between 0 and %d",maxStrength));
+            throw new IllegalArgumentException(String.format("Health must be between 0 and %d", maxStrength));
         this.strength = strength;
     }
 

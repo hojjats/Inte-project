@@ -83,9 +83,23 @@ public class PlayerTest {
     }
 
     @Test
+    void setArmorNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.setArmor(null);
+        });
+    }
+
+    @Test
     void setWeapon() {
         p.setWeapon(woodAxe);
         assertEquals(p.getWeapon(), woodAxe);
+    }
+
+    @Test
+    void setWeaponNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            p.setWeapon(null);
+        });
     }
 
     @Test
@@ -122,6 +136,13 @@ public class PlayerTest {
         int playerStrength = loadedPlayer.getStrength();
         assertEquals(9, playerStrength);
         assertEquals(str, "You take " + (10 - playerStrength) + " damage!");
+    }
+
+    @Test
+    void takeDamageNegative() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            loadedPlayer.takeDamage(-1);
+        });
     }
 
 }

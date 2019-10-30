@@ -6,7 +6,6 @@ public class MapTileTest {
 
     MapTile startTile = new MapTile(new Effect(), "StartWood");
 
-
     @Test
     void create5tiles() {
         MapTile[] tiles = new MapTile[10];

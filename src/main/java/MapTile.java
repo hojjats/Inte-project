@@ -23,6 +23,8 @@ public class MapTile {
         this.discoveredTiles = discoveredTiles;
         setPositionFromDirection(previousTile, direction);
         setTile(previousTile, direction);
+        putEnemyOnTile();
+        putItemOnTile();
     }
 
     public MapTile(Effect effect, String name) {
@@ -34,8 +36,7 @@ public class MapTile {
         this.position = new Position(0, 0);
         this.name = name;
         this.discoveredTiles = 1;
-        putEnemyOnTile();
-        putItemOnTile();
+
     }
 
 
@@ -82,6 +83,7 @@ public class MapTile {
 
     public void putEnemyOnTile() {
         int strength = (discoveredTiles / DIFFICULTY_MODIFIER) + 1;
+        strength = strength > 20 ? 20 : strength;
         int speed = 1;
         enemyOnTile = new Enemy("Slime", strength, speed, true);
     }

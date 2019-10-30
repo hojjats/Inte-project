@@ -8,6 +8,14 @@ class GameMapTest {
     GameMap gameMap = new GameMap();
     MapTile startTile = new MapTile(new Effect(), "startTile");
 
+    @Test
+    void testForProfiler() {
+        MapTile lastTile = startTile;
+        for (int i = 1; i <= 1000000; i++) {
+            lastTile = gameMap.move(lastTile, new Position(0, i));
+        }
+        assertEquals(lastTile.getDiscoveredTiles(), 1000001);
+    }
 
     @Test
     void createGameMap() {

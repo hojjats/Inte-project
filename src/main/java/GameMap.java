@@ -26,7 +26,7 @@ public class GameMap {
     }
 
     public int getDiscoveredTiles() {
-        return tiles.size();
+        return tiles.size() + 1;
     }
 
     public Directions getDirection(MapTile currentTile, Position newPosition) {

@@ -2,7 +2,7 @@ package mocks;
 
 public class Random extends java.util.Random {
 
-    int returnValue;
+    private int returnValue;
 
     public Random(int value) {
         this.returnValue = value - 1;
